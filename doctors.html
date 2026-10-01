@@ -90,7 +90,7 @@
       color: inherit;
       transition: background-color 0.4s ease, color 0.4s ease;
       min-height: 100vh;
-      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     /* 3D TACTILE BUTTON WITH REAL PHYSICAL PUSH PHYSICS */
@@ -199,23 +199,28 @@
     *, ::before, ::after {
       box-sizing: border-box !important;
     }
-    html, body {
+        /* Sticky Header & Boundary Optimization */
+    html {
       max-width: 100vw !important;
-      overflow-x: hidden !important;
-      position: relative;
+      overflow-x: clip !important;
       margin: 0;
       padding: 0;
       -webkit-text-size-adjust: 100%;
     }
-    img, video, iframe, canvas, svg {
-      max-width: 100% !important;
-      height: auto;
+    body {
+      max-width: 100vw !important;
+      overflow-x: clip !important;
+      margin: 0;
+      padding: 0;
+      position: relative;
     }
-    p, span, h1, h2, h3, h4, h5, h6, a, button, label, li {
-      overflow-wrap: break-word !important;
-      word-wrap: break-word !important;
+    header:not([class*="fixed"]) {
+      position: -webkit-sticky !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 50 !important;
     }
-    section, header, footer, main, aside, article {
+    section, footer, main, aside, article {
       max-width: 100vw !important;
       overflow-x: clip !important;
       box-sizing: border-box !important;
@@ -1217,8 +1222,7 @@
                   <img 
                     src="images/doctors_hero_suite.jpg" 
                     alt="Clinical Consultation Suite" 
-                    className="w-full h-[380px] sm:h-[440px] object-cover group-hover:scale-105 transition-transform duration-700" 
-                  />
+                    className="w-full h-[380px] sm:h-[440px] object-cover group-hover:scale-105 transition-transform duration-700" loading="eager" fetchPriority="high" decoding="async" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   
                   {/* Floating Top Badge */}
@@ -1332,8 +1336,7 @@
                       <img 
                         src={doc.image} 
                         alt={doc.name} 
-                        className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500" 
-                      />
+                        className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
                       
                       {/* Badge Top Left */}
@@ -1978,8 +1981,7 @@
                           <img 
                             src={doc.image} 
                             alt={doc.name} 
-                            className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover object-top border-2 border-gold-400/30 shrink-0" 
-                          />
+                            className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover object-top border-2 border-gold-400/30 shrink-0" loading="lazy" decoding="async" />
                           <div>
                             <div className="flex items-center gap-2">
                               <h3 className="font-serif text-base sm:text-lg font-bold text-slate-900 dark:text-white">
@@ -2130,7 +2132,7 @@
 
                   {/* Quick Card Preview */}
                   <div className="flex items-center gap-3.5 p-3 rounded-xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-slate-800">
-                    <img src={chosenDoc.image} alt={chosenDoc.name} className="w-12 h-12 rounded-xl object-cover object-top border border-gold-400/40" />
+                    <img src={chosenDoc.image} alt={chosenDoc.name} className="w-12 h-12 rounded-xl object-cover object-top border border-gold-400/40" loading="lazy" decoding="async" />
                     <div>
                       <div className="text-xs font-bold text-slate-900 dark:text-white">{chosenDoc.name}</div>
                       <div className="text-[11px] text-gold-600 dark:text-gold-400">{chosenDoc.location}</div>

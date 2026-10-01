@@ -90,7 +90,7 @@
       color: inherit;
       transition: background-color 0.4s ease, color 0.4s ease;
       min-height: 100vh;
-      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     /* 3D TACTILE BUTTON WITH REAL PHYSICAL PUSH PHYSICS */
@@ -199,23 +199,28 @@
     *, ::before, ::after {
       box-sizing: border-box !important;
     }
-    html, body {
+        /* Sticky Header & Boundary Optimization */
+    html {
       max-width: 100vw !important;
-      overflow-x: hidden !important;
-      position: relative;
+      overflow-x: clip !important;
       margin: 0;
       padding: 0;
       -webkit-text-size-adjust: 100%;
     }
-    img, video, iframe, canvas, svg {
-      max-width: 100% !important;
-      height: auto;
+    body {
+      max-width: 100vw !important;
+      overflow-x: clip !important;
+      margin: 0;
+      padding: 0;
+      position: relative;
     }
-    p, span, h1, h2, h3, h4, h5, h6, a, button, label, li {
-      overflow-wrap: break-word !important;
-      word-wrap: break-word !important;
+    header:not([class*="fixed"]) {
+      position: -webkit-sticky !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 50 !important;
     }
-    section, header, footer, main, aside, article {
+    section, footer, main, aside, article {
       max-width: 100vw !important;
       overflow-x: clip !important;
       box-sizing: border-box !important;
@@ -1057,8 +1062,7 @@ const TreatmentAcneSection = () => {
               <img 
                 src="images/treatment_acne_scars.jpg" 
                 alt="Derma Aura Acne and Scar Reconstruction" 
-                className="w-full h-[380px] sm:h-[480px] object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+                className="w-full h-[380px] sm:h-[480px] object-cover transition-transform duration-700 group-hover:scale-105" loading="eager" fetchPriority="high" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent pointer-events-none" />
 
               {/* Resolution Metrics Chip */}
@@ -1233,8 +1237,7 @@ const TreatmentLaserSection = () => {
               <img 
                 src="images/treatment_laser_pavilion.jpg" 
                 alt="Derma Aura Laser Surgery Operating Room" 
-                className="w-full h-[380px] sm:h-[480px] object-cover"
-              />
+                className="w-full h-[380px] sm:h-[480px] object-cover" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-slate-950/30 pointer-events-none" />
 
               {/* Scanning reticle beam */}
@@ -1399,8 +1402,7 @@ const TreatmentAntiAgingSection = () => {
               <img 
                 src="images/treatment_anti_aging.jpg" 
                 alt="Derma Aura Anti-Aging Dermal Sculpting" 
-                className="w-full h-[380px] sm:h-[480px] object-cover"
-              />
+                className="w-full h-[380px] sm:h-[480px] object-cover" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-slate-950/20 pointer-events-none" />
 
               {/* Longevity Badge */}
@@ -1536,8 +1538,7 @@ const TreatmentPigmentationSection = () => {
               <img 
                 src="images/treatment_pigmentation_tone.jpg" 
                 alt="Derma Aura Pigmentation and Melasma Care" 
-                className="w-full h-[380px] sm:h-[480px] object-cover"
-              />
+                className="w-full h-[380px] sm:h-[480px] object-cover" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-slate-950/20 pointer-events-none" />
 
               {/* Protocol Badge */}
@@ -1679,8 +1680,7 @@ const TreatmentHairScalpSection = () => {
               <img 
                 src="images/treatment_hair_scalp.jpg" 
                 alt="Derma Aura Trichology and PRP Hair Restoration" 
-                className="w-full h-[380px] sm:h-[480px] object-cover"
-              />
+                className="w-full h-[380px] sm:h-[480px] object-cover" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-slate-950/20 pointer-events-none" />
 
               {/* Regrowth metric chip */}
@@ -1838,8 +1838,7 @@ const TreatmentRejuvenationBodySection = () => {
               <img 
                 src="images/treatment_skin_rejuvenation.jpg" 
                 alt="Derma Aura Skin Rejuvenation and Body Contouring" 
-                className="w-full h-[380px] sm:h-[460px] object-cover"
-              />
+                className="w-full h-[380px] sm:h-[460px] object-cover" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-slate-950/20 pointer-events-none" />
 
               <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 backdrop-blur-md bg-white/95 dark:bg-obsidian-900/95 border border-slate-200/80 dark:border-slate-700/80 rounded-2xl p-4 sm:p-5 shadow-xl text-left [dir='rtl']:text-right">

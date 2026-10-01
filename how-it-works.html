@@ -90,7 +90,7 @@
       color: inherit;
       transition: background-color 0.4s ease, color 0.4s ease;
       min-height: 100vh;
-      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     /* 3D TACTILE BUTTON WITH REAL PHYSICAL PUSH PHYSICS */
@@ -199,23 +199,28 @@
     *, ::before, ::after {
       box-sizing: border-box !important;
     }
-    html, body {
+        /* Sticky Header & Boundary Optimization */
+    html {
       max-width: 100vw !important;
-      overflow-x: hidden !important;
-      position: relative;
+      overflow-x: clip !important;
       margin: 0;
       padding: 0;
       -webkit-text-size-adjust: 100%;
     }
-    img, video, iframe, canvas, svg {
-      max-width: 100% !important;
-      height: auto;
+    body {
+      max-width: 100vw !important;
+      overflow-x: clip !important;
+      margin: 0;
+      padding: 0;
+      position: relative;
     }
-    p, span, h1, h2, h3, h4, h5, h6, a, button, label, li {
-      overflow-wrap: break-word !important;
-      word-wrap: break-word !important;
+    header:not([class*="fixed"]) {
+      position: -webkit-sticky !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 50 !important;
     }
-    section, header, footer, main, aside, article {
+    section, footer, main, aside, article {
       max-width: 100vw !important;
       overflow-x: clip !important;
       box-sizing: border-box !important;
@@ -1121,8 +1126,7 @@
                   <img
                     src="images/how_it_works_odyssey_hero.jpg"
                     alt="Clinical Care Odyssey Grand Atrium"
-                    className="w-full h-[280px] sm:h-[340px] object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
+                    className="w-full h-[280px] sm:h-[340px] object-cover group-hover:scale-105 transition-transform duration-700" loading="eager" fetchPriority="high" decoding="async" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
                   
                   <div className="absolute top-3 left-3">
@@ -1432,8 +1436,7 @@
                     <img
                       src={current.image}
                       alt={current.doctor}
-                      className="w-20 h-24 rounded-2xl object-cover object-top border-2 border-gold-400/40 shadow-md shrink-0"
-                    />
+                      className="w-20 h-24 rounded-2xl object-cover object-top border-2 border-gold-400/40 shadow-md shrink-0" loading="lazy" decoding="async" />
                     <div className="space-y-1">
                       <h3 className="font-serif text-lg font-bold text-slate-900 dark:text-white leading-tight">
                         {current.doctor}
@@ -1652,8 +1655,7 @@
                   <img
                     src="images/how_it_works_skin_assessment.jpg"
                     alt="Visia 3D Multi-Spectral Skin Assessment Suite"
-                    className="w-full h-[380px] sm:h-[460px] object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
+                    className="w-full h-[380px] sm:h-[460px] object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
 
                   {/* Animated Scanner Laser Sweep on Viewport */}
@@ -1937,8 +1939,7 @@
                     <img
                       src="images/how_it_works_treatment_plan.jpg"
                       alt="Doctor Consultation & Treatment Plan Desk"
-                      className="w-full h-[280px] sm:h-[340px] object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
+                      className="w-full h-[280px] sm:h-[340px] object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                     
                     <div className="absolute top-3 left-3">
@@ -2046,8 +2047,7 @@
                   <img
                     src="images/how_it_works_treatment_session.jpg"
                     alt="Precision Laser Treatment Session"
-                    className="w-full h-[360px] sm:h-[430px] object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
+                    className="w-full h-[360px] sm:h-[430px] object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
                   {/* Cleanroom Tag */}
@@ -2258,8 +2258,7 @@
                   <img
                     src="images/how_it_works_progress_tracking.jpg"
                     alt="Digital Patient EHR Skin Progress Report"
-                    className="w-full h-[380px] sm:h-[450px] object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
+                    className="w-full h-[380px] sm:h-[450px] object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                   
                   <div className="absolute top-4 left-4">
@@ -2298,8 +2297,7 @@
                     <img
                       src={cur.beforeImg}
                       alt="Before Treatment"
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
+                      className="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
                     <span className="absolute bottom-2.5 left-2.5 px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-md text-white text-[10px] font-bold">
                       Baseline
                     </span>
@@ -2313,8 +2311,7 @@
                         src={cur.afterImg}
                         alt="After Treatment"
                         className="absolute inset-0 w-full h-full object-cover max-w-none"
-                        style={{ width: "100%" }}
-                      />
+                        style={{ width: "100%" }} loading="lazy" decoding="async" />
                       <span className="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-md bg-gold-600/80 backdrop-blur-md text-white text-[10px] font-bold">
                         After Result
                       </span>
@@ -2503,8 +2500,7 @@
                     <img
                       src="images/how_it_works_continued_journey.jpg"
                       alt="Clinic Longevity Bar & Skincare Bar"
-                      className="w-full h-[280px] sm:h-[320px] object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
+                      className="w-full h-[280px] sm:h-[320px] object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" decoding="async" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                     
                     <div className="absolute top-3 left-3">

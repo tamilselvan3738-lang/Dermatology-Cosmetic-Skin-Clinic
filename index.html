@@ -89,7 +89,7 @@
       color: inherit;
       transition: background-color 0.4s ease, color 0.4s ease;
       min-height: 100vh;
-      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     /* 3D TACTILE BUTTON WITH REAL PHYSICAL PUSH PHYSICS */
@@ -198,23 +198,28 @@
     *, ::before, ::after {
       box-sizing: border-box !important;
     }
-    html, body {
+        /* Sticky Header & Boundary Optimization */
+    html {
       max-width: 100vw !important;
-      overflow-x: hidden !important;
-      position: relative;
+      overflow-x: clip !important;
       margin: 0;
       padding: 0;
       -webkit-text-size-adjust: 100%;
     }
-    img, video, iframe, canvas, svg {
-      max-width: 100% !important;
-      height: auto;
+    body {
+      max-width: 100vw !important;
+      overflow-x: clip !important;
+      margin: 0;
+      padding: 0;
+      position: relative;
     }
-    p, span, h1, h2, h3, h4, h5, h6, a, button, label, li {
-      overflow-wrap: break-word !important;
-      word-wrap: break-word !important;
+    header:not([class*="fixed"]) {
+      position: -webkit-sticky !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 50 !important;
     }
-    section, header, footer, main, aside, article {
+    section, footer, main, aside, article {
       max-width: 100vw !important;
       overflow-x: clip !important;
       box-sizing: border-box !important;
@@ -994,8 +999,7 @@
                     <img 
                       src="images/index_hero_clinical.jpg" 
                       alt="Derma·Aura Clinical Pavilion Interior" 
-                      className="w-full h-[400px] sm:h-[480px] object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
+                      className="w-full h-[400px] sm:h-[480px] object-cover group-hover:scale-105 transition-transform duration-700" loading="eager" fetchPriority="high" decoding="async" />
 
                     {/* Gradient Overlay for Text Readability */}
                     <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/85 via-obsidian-950/20 to-transparent pointer-events-none" />
@@ -1156,8 +1160,7 @@
                       <img 
                         src={item.image} 
                         alt={item.title} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
                       <div className="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold uppercase bg-slate-950/75 backdrop-blur-md text-gold-300 border border-gold-500/30">
                         {item.badge}
                       </div>
@@ -1370,8 +1373,7 @@
                     <img 
                       src="images/index_laser_precision.jpg" 
                       alt="Precision Clinical Laser Treatment" 
-                      className="w-full h-full object-cover"
-                    />
+                      className="w-full h-full object-cover" loading="lazy" decoding="async" />
                     <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/80 via-transparent to-transparent" />
                     
                     <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-xl bg-white/90 dark:bg-obsidian-900/90 backdrop-blur-md border border-white/20 dark:border-white/10 text-xs text-left [dir='rtl']:text-right space-y-1">
@@ -1457,8 +1459,7 @@
                     <img 
                       src="images/index_patient_care.jpg" 
                       alt="Empathetic Dermatologist Consultation" 
-                      className="w-full h-[440px] object-cover"
-                    />
+                      className="w-full h-[440px] object-cover" loading="lazy" decoding="async" />
                     <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/80 via-transparent to-transparent pointer-events-none" />
                     
                     <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-white/90 dark:bg-obsidian-900/90 backdrop-blur-md border border-white/20 text-xs text-left [dir='rtl']:text-right space-y-1">
@@ -1552,8 +1553,7 @@
                 <img 
                   src="images/index_doctor_team.jpg" 
                   alt="Derma·Aura Medical Faculty" 
-                  className="w-full h-72 sm:h-96 object-cover object-top"
-                />
+                  className="w-full h-72 sm:h-96 object-cover object-top" loading="lazy" decoding="async" />
                 <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/90 via-obsidian-950/30 to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-left [dir='rtl']:text-right">
                   <div>
@@ -1589,8 +1589,7 @@
                       <img 
                         src={doc.photo} 
                         alt={doc.name} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
                       <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-bold bg-slate-950/75 text-emerald-400 border border-emerald-500/30">
                         {doc.experience}
                       </div>
@@ -1634,8 +1633,7 @@
                   <img 
                     src="images/index_clinic_facility.jpg" 
                     alt="Derma·Aura Surgical Laser Pavilion Room" 
-                    className="w-full h-full object-cover"
-                  />
+                    className="w-full h-full object-cover" loading="lazy" decoding="async" />
                   <div className="absolute inset-0 bg-gradient-to-t from-obsidian-950/80 via-transparent to-transparent pointer-events-none" />
                   <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-white/90 dark:bg-obsidian-900/90 backdrop-blur-md border border-white/20 text-xs text-left [dir='rtl']:text-right space-y-1">
                     <p className="font-bold text-slate-900 dark:text-white">Pavilion 01: HALO™ Laser & Photonic Suite</p>
@@ -1700,8 +1698,7 @@
                     <img 
                       src="images/index_before_after_feature.jpg" 
                       alt="Before and After Dermatology Results" 
-                      className="w-full h-full object-cover"
-                    />
+                      className="w-full h-full object-cover" loading="lazy" decoding="async" />
 
                     {/* Left & Right floating labels */}
                     <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-slate-950/80 text-amber-300 backdrop-blur-md border border-amber-500/30">

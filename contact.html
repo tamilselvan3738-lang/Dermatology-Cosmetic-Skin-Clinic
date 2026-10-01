@@ -90,7 +90,7 @@
       color: inherit;
       transition: background-color 0.4s ease, color 0.4s ease;
       min-height: 100vh;
-      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     /* 3D TACTILE BUTTON WITH REAL PHYSICAL PUSH PHYSICS */
@@ -199,23 +199,28 @@
     *, ::before, ::after {
       box-sizing: border-box !important;
     }
-    html, body {
+        /* Sticky Header & Boundary Optimization */
+    html {
       max-width: 100vw !important;
-      overflow-x: hidden !important;
-      position: relative;
+      overflow-x: clip !important;
       margin: 0;
       padding: 0;
       -webkit-text-size-adjust: 100%;
     }
-    img, video, iframe, canvas, svg {
-      max-width: 100% !important;
-      height: auto;
+    body {
+      max-width: 100vw !important;
+      overflow-x: clip !important;
+      margin: 0;
+      padding: 0;
+      position: relative;
     }
-    p, span, h1, h2, h3, h4, h5, h6, a, button, label, li {
-      overflow-wrap: break-word !important;
-      word-wrap: break-word !important;
+    header:not([class*="fixed"]) {
+      position: -webkit-sticky !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 50 !important;
     }
-    section, header, footer, main, aside, article {
+    section, footer, main, aside, article {
       max-width: 100vw !important;
       overflow-x: clip !important;
       box-sizing: border-box !important;
@@ -1057,8 +1062,7 @@ const ContactGatewaySection = () => {
               <img 
                 src="images/contact_concierge_hero.jpg" 
                 alt="Derma Aura Clinical Concierge Desk" 
-                className="w-full h-[380px] sm:h-[480px] object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+                className="w-full h-[380px] sm:h-[480px] object-cover transition-transform duration-700 group-hover:scale-105" loading="eager" fetchPriority="high" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent pointer-events-none" />
 
               {/* Live Reception Status Badge */}
@@ -1206,8 +1210,7 @@ const ClinicAddressSection = () => {
               <img 
                 src="images/contact_clinic_location.jpg" 
                 alt="Derma Aura Aesthetic Boulevard Entrance" 
-                className="w-full h-[380px] sm:h-[480px] object-cover"
-              />
+                className="w-full h-[380px] sm:h-[480px] object-cover" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/20 pointer-events-none" />
 
               {/* Target Coordinates Overlay Chip */}
@@ -1562,8 +1565,7 @@ const EmergencyContactSection = () => {
               <img 
                 src="images/contact_emergency_triage.jpg" 
                 alt="Derma Aura Emergency Triage Support" 
-                className="w-full h-[380px] sm:h-[460px] object-cover"
-              />
+                className="w-full h-[380px] sm:h-[460px] object-cover" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent pointer-events-none" />
 
               {/* On-Call Doctor Active Badge */}
@@ -2060,8 +2062,7 @@ const ContactFormSection = () => {
               <img 
                 src="images/contact_communication_desk.jpg" 
                 alt="Derma Aura Medical Communication Room" 
-                className="w-full h-[400px] sm:h-[500px] object-cover"
-              />
+                className="w-full h-[400px] sm:h-[500px] object-cover" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent pointer-events-none" />
 
               <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 text-white text-left [dir='rtl']:text-right">

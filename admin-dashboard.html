@@ -119,23 +119,28 @@
     *, ::before, ::after {
       box-sizing: border-box !important;
     }
-    html, body {
+        /* Sticky Header & Boundary Optimization */
+    html {
       max-width: 100vw !important;
-      overflow-x: hidden !important;
-      position: relative;
+      overflow-x: clip !important;
       margin: 0;
       padding: 0;
       -webkit-text-size-adjust: 100%;
     }
-    img, video, iframe, canvas, svg {
-      max-width: 100% !important;
-      height: auto;
+    body {
+      max-width: 100vw !important;
+      overflow-x: clip !important;
+      margin: 0;
+      padding: 0;
+      position: relative;
     }
-    p, span, h1, h2, h3, h4, h5, h6, a, button, label, li {
-      overflow-wrap: break-word !important;
-      word-wrap: break-word !important;
+    header:not([class*="fixed"]) {
+      position: -webkit-sticky !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 50 !important;
     }
-    section, header, footer, main, aside, article {
+    section, footer, main, aside, article {
       max-width: 100vw !important;
       overflow-x: clip !important;
       box-sizing: border-box !important;
@@ -2909,8 +2914,7 @@
                     <img 
                       src={doc.photo} 
                       alt={doc.name} 
-                      className="w-14 h-14 rounded-2xl object-cover border border-gold-400/40 shadow-sm flex-shrink-0"
-                    />
+                      className="w-14 h-14 rounded-2xl object-cover border border-gold-400/40 shadow-sm flex-shrink-0" loading="lazy" decoding="async" />
                     <div>
                       <h3 className="font-serif text-base font-bold text-slate-900 dark:text-white">
                         {doc.name}
@@ -3298,8 +3302,7 @@
                   <img 
                     src={p.image} 
                     alt={p.treatment} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" />
                   <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold bg-black/70 backdrop-blur-md text-gold-300 border border-gold-400/30">
                     {p.milestone}
                   </div>
@@ -3701,8 +3704,7 @@
                   <img 
                     src={item.image} 
                     alt={item.title} 
-                    className="w-full h-full object-cover"
-                  />
+                    className="w-full h-full object-cover" loading="lazy" decoding="async" />
                   {item.featured && (
                     <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold bg-gold-500 text-white shadow-md">
                       Featured Case
@@ -3899,8 +3901,7 @@
                 <img 
                   src="images/doctor_sophia_lin.jpg" 
                   alt="Dr. Sophia Lin" 
-                  className="w-8 h-8 rounded-lg object-cover border border-gold-400/40"
-                />
+                  className="w-8 h-8 rounded-lg object-cover border border-gold-400/40" loading="lazy" decoding="async" />
                 <div className="text-left [dir='rtl']:text-right">
                   <span className="block text-xs font-bold text-slate-900 dark:text-white leading-tight">
                     Dr. Sophia Lin, MD
@@ -3961,8 +3962,7 @@
               <img 
                 src="images/doctor_sophia_lin.jpg" 
                 alt="Dr. Sophia Lin" 
-                className="w-8 h-8 rounded-xl object-cover border border-gold-400/40 flex-shrink-0"
-              />
+                className="w-8 h-8 rounded-xl object-cover border border-gold-400/40 flex-shrink-0" loading="lazy" decoding="async" />
               <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white dark:border-obsidian-900" />
             </div>
 

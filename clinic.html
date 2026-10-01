@@ -90,7 +90,7 @@
       color: inherit;
       transition: background-color 0.4s ease, color 0.4s ease;
       min-height: 100vh;
-      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     /* 3D TACTILE BUTTON WITH REAL PHYSICAL PUSH PHYSICS */
@@ -199,23 +199,28 @@
     *, ::before, ::after {
       box-sizing: border-box !important;
     }
-    html, body {
+        /* Sticky Header & Boundary Optimization */
+    html {
       max-width: 100vw !important;
-      overflow-x: hidden !important;
-      position: relative;
+      overflow-x: clip !important;
       margin: 0;
       padding: 0;
       -webkit-text-size-adjust: 100%;
     }
-    img, video, iframe, canvas, svg {
-      max-width: 100% !important;
-      height: auto;
+    body {
+      max-width: 100vw !important;
+      overflow-x: clip !important;
+      margin: 0;
+      padding: 0;
+      position: relative;
     }
-    p, span, h1, h2, h3, h4, h5, h6, a, button, label, li {
-      overflow-wrap: break-word !important;
-      word-wrap: break-word !important;
+    header:not([class*="fixed"]) {
+      position: -webkit-sticky !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 50 !important;
     }
-    section, header, footer, main, aside, article {
+    section, footer, main, aside, article {
       max-width: 100vw !important;
       overflow-x: clip !important;
       box-sizing: border-box !important;
@@ -1034,8 +1039,7 @@ const ClinicOverviewSection = () => {
               <img 
                 src="images/clinic_overview_facility.jpg" 
                 alt="Derma Aura Grand Medical Pavilion" 
-                className="w-full h-[360px] sm:h-[460px] lg:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+                className="w-full h-[360px] sm:h-[460px] lg:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105" loading="eager" fetchPriority="high" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent pointer-events-none" />
 
               {/* Live Facility Telemetry HUD Chip */}
@@ -1289,8 +1293,7 @@ const ClinicReceptionSection = () => {
               <img 
                 src="images/clinic_reception_area.jpg" 
                 alt="Derma Aura Reception Area & Wellness Lounge" 
-                className="w-full h-[380px] sm:h-[480px] object-cover"
-              />
+                className="w-full h-[380px] sm:h-[480px] object-cover" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent pointer-events-none" />
 
               {/* Dynamic Bottom Card Highlighting the Active Amenity */}
@@ -1419,8 +1422,7 @@ const ClinicConsultationSection = () => {
               <img 
                 src="images/clinic_consultation_room.jpg" 
                 alt="Derma Aura Private Consultation Suite" 
-                className="w-full h-[380px] sm:h-[480px] object-cover"
-              />
+                className="w-full h-[380px] sm:h-[480px] object-cover" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent pointer-events-none" />
 
               {/* Interactive Hotspot Pins */}
@@ -1614,8 +1616,7 @@ const ClinicLaserSection = () => {
               <img 
                 src="images/clinic_laser_facility.jpg" 
                 alt="Derma Aura Laser Surgery Suite" 
-                className="w-full h-[380px] sm:h-[480px] object-cover"
-              />
+                className="w-full h-[380px] sm:h-[480px] object-cover" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/20 pointer-events-none" />
 
               {/* Animated Continuous Laser Scanning Line */}
@@ -1804,8 +1805,7 @@ const ClinicSkinAnalysisSection = () => {
               <img 
                 src="images/clinic_skin_analysis_facility.jpg" 
                 alt="Derma Aura AI Skin Analysis Suite" 
-                className="w-full h-[380px] sm:h-[480px] object-cover"
-              />
+                className="w-full h-[380px] sm:h-[480px] object-cover" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/30 pointer-events-none" />
 
               {/* Rotating Radar Sweep Graphic in Center */}
@@ -1981,8 +1981,7 @@ const ClinicHygieneSection = () => {
               <img 
                 src="images/clinic_hygiene_safety.jpg" 
                 alt="Derma Aura Sterile Medical Facility" 
-                className="w-full h-[380px] sm:h-[480px] object-cover"
-              />
+                className="w-full h-[380px] sm:h-[480px] object-cover" loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/20 pointer-events-none" />
 
               {/* Pulsing Sterile Seal Badge */}
@@ -2152,8 +2151,7 @@ const ClinicVirtualTourGallerySection = ({ setLoginModal }) => {
                 src="images/clinic_virtual_tour_gallery.jpg" 
                 alt="Derma Aura 360 Virtual Tour Station" 
                 className="w-full h-full object-cover transition-transform duration-300"
-                style={{ transform: `scale(1.08) translateX(${panAngle * -0.2}px)` }}
-              />
+                style={{ transform: `scale(1.08) translateX(${panAngle * -0.2}px)` }} loading="lazy" decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-slate-950/40 pointer-events-none" />
 
               {/* Station Indicators Overlay Pins */}
@@ -2284,8 +2282,7 @@ const ClinicVirtualTourGallerySection = ({ setLoginModal }) => {
                   <img 
                     src={item.src} 
                     alt={item.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                     <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gold-500 text-slate-950 text-xs font-bold">
                       <IconMaximize className="w-3.5 h-3.5" />
@@ -2328,7 +2325,7 @@ const ClinicVirtualTourGallerySection = ({ setLoginModal }) => {
                 className="relative z-10 max-w-3xl w-full bg-white dark:bg-obsidian-900 rounded-3xl overflow-hidden border border-gold-400/40 shadow-2xl"
               >
                 <div className="relative h-80 sm:h-96">
-                  <img src={lightboxImage.src} alt={lightboxImage.title} className="w-full h-full object-cover" />
+                  <img src={lightboxImage.src} alt={lightboxImage.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                   <button
                     onClick={() => setLightboxImage(null)}
                     className="absolute top-4 right-4 p-2 rounded-full bg-black/60 text-white hover:bg-black/90 transition-colors"
