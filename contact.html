@@ -1,0 +1,2921 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dermatology & Cosmetic Skin Clinic - Responsive Animated Navigation</title>
+  <!-- Clinic Luxury Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+
+  
+  <!-- Google Fonts: Plus Jakarta Sans, Playfair Display, and Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          screens: {
+            'laptop': '1380px',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif'],
+            display: ['"Outfit"', 'sans-serif'],
+          },
+          colors: {
+            gold: {
+              50: '#FDFBF7',
+              100: '#FAF4E8',
+              200: '#F3E5C9',
+              300: '#E7D1A2',
+              400: '#D7B976',
+              500: '#C5A059', // Primary Luxury Gold
+              600: '#A9833D',
+              700: '#86642A',
+              800: '#64481F',
+              900: '#463116',
+              950: '#1A1308',
+            },
+            tealSkin: {
+              50: '#F0FDFA',
+              100: '#CCFBF1',
+              400: '#2DD4BF',
+              500: '#14B8A6',
+              600: '#0D9488', // Clinical Serene Medical Teal
+              800: '#115E59',
+              900: '#134E4A',
+              950: '#042F2E',
+            },
+            obsidian: {
+              950: '#05070B',
+              900: '#080C14',
+              850: '#0E131F',
+              800: '#151D2E',
+              700: '#232D42',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- React 18 & Framer Motion & Babel -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/framer-motion@10.18.0/dist/framer-motion.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    /* CSS Root Themes for absolute stability across CDN loaders */
+    html.light, html:not(.dark) {
+      background-color: #FAF9F6;
+      color: #0F172A;
+      color-scheme: light;
+    }
+    html.dark {
+      background-color: #080C14;
+      color: #F8FAFC;
+      color-scheme: dark;
+    }
+    body {
+      background-color: inherit;
+      color: inherit;
+      transition: background-color 0.4s ease, color 0.4s ease;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* 3D TACTILE BUTTON WITH REAL PHYSICAL PUSH PHYSICS */
+    .btn-3d-luxury {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      letter-spacing: 0.025em;
+      color: #FFFFFF !important;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(180deg, #E6C887 0%, #C5A059 45%, #9E7A32 100%);
+      border-radius: 0.85rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.65);
+      border-left: 1px solid rgba(255, 255, 255, 0.35);
+      border-right: 1px solid rgba(0, 0, 0, 0.2);
+      border-bottom: 2px solid #583F15;
+      box-shadow: 
+        0 5px 0 #684815,
+        0 8px 16px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      transform: translateY(0);
+      transition: all 0.12s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .btn-3d-luxury:hover {
+      background: linear-gradient(180deg, #F0D59B 0%, #D1AD64 45%, #AD873B 100%);
+      box-shadow: 
+        0 6px 0 #684815,
+        0 12px 22px rgba(197, 160, 89, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      transform: translateY(-2px);
+    }
+
+    .btn-3d-luxury:active {
+      background: linear-gradient(180deg, #BFA057 0%, #A9843A 60%, #876523 100%);
+      box-shadow: 
+        0 1px 0 #684815,
+        0 3px 6px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(0, 0, 0, 0.35);
+      transform: translateY(4px);
+    }
+
+    /* Shimmer light reflection sweep across 3D button */
+    .shimmer-sweep {
+      position: relative;
+      overflow: hidden;
+    }
+    .shimmer-sweep::after {
+      content: '';
+      position: absolute;
+      top: -60%;
+      left: -80%;
+      width: 60%;
+      height: 220%;
+      background: linear-gradient(
+        60deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.45) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(25deg);
+      transition: all 0.8s ease;
+    }
+    .shimmer-sweep:hover::after {
+      left: 150%;
+    }
+
+    /* RTL Direction Mirror Adjustments */
+    [dir="rtl"] {
+      text-align: right;
+    }
+    [dir="rtl"] .dropdown-menu {
+      left: auto !important;
+      right: 0 !important;
+    }
+    [dir="rtl"] .rtl-mirror {
+      transform: scaleX(-1);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .dark ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(197, 160, 89, 0.45);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(197, 160, 89, 0.8);
+    }
+  
+    /* ========================================================= */
+    /* MASTER MOBILE-FIRST RESPONSIVE ARCHITECTURE               */
+    /* Enforces 100% boundary safety across 320, 480, 768, 1024px */
+    /* ========================================================= */
+    *, ::before, ::after {
+      box-sizing: border-box !important;
+    }
+    html, body {
+      max-width: 100vw !important;
+      overflow-x: hidden !important;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      -webkit-text-size-adjust: 100%;
+    }
+    img, video, iframe, canvas, svg {
+      max-width: 100% !important;
+      height: auto;
+    }
+    p, span, h1, h2, h3, h4, h5, h6, a, button, label, li {
+      overflow-wrap: break-word !important;
+      word-wrap: break-word !important;
+    }
+    section, header, footer, main, aside, article {
+      max-width: 100vw !important;
+      overflow-x: clip !important;
+      box-sizing: border-box !important;
+    }
+    /* Mobile Breakpoints: 320px, 480px, 768px, 1024px */
+    @media (max-width: 360px) {
+      .max-w-7xl, .max-w-6xl, .max-w-5xl {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+      }
+      h1, .text-4xl, .text-5xl, .text-6xl {
+        font-size: 1.55rem !important;
+        line-height: 2rem !important;
+      }
+      h2, .text-3xl {
+        font-size: 1.25rem !important;
+        line-height: 1.65rem !important;
+      }
+      .btn-3d-luxury {
+        padding: 0.5rem 0.85rem !important;
+        font-size: 11px !important;
+      }
+    }
+    @media (max-width: 480px) {
+      h1, .text-5xl, .text-6xl {
+        font-size: 1.75rem !important;
+        line-height: 2.2rem !important;
+      }
+      h2, .text-3xl {
+        font-size: 1.35rem !important;
+        line-height: 1.8rem !important;
+      }
+      .mobile-stack {
+        flex-direction: column !important;
+        width: 100% !important;
+      }
+      .btn-responsive-mobile {
+        width: 100% !important;
+        justify-content: center !important;
+      }
+    }
+    @media (max-width: 768px) {
+      .table-responsive-container {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100% !important;
+      }
+    }
+
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-gold-500/25 selection:text-gold-700 dark:selection:text-gold-300">
+
+  <div id="root"></div>
+
+  <!-- React Babel Application Script -->
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+    const { motion, AnimatePresence } = window.Motion || {
+      // Graceful fallback
+      motion: {
+        div: (props) => <div {...props}>{props.children}</div>,
+        nav: (props) => <nav {...props}>{props.children}</nav>,
+        span: (props) => <span {...props}>{props.children}</span>,
+        button: (props) => <button {...props}>{props.children}</button>,
+        svg: (props) => <svg {...props}>{props.children}</svg>,
+        path: (props) => <path {...props}>{props.children}</path>,
+      },
+      AnimatePresence: ({ children }) => <>{children}</>
+    };
+
+    // ==========================================
+    // VECTOR ICON COMPONENTS
+    // ==========================================
+    const IconSparkle = ({ className = "w-4 h-4" }) => (
+      <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
+      </svg>
+    );
+
+    const IconChevronDown = ({ className = "w-4 h-4", rotate = false }) => (
+      <svg 
+        className={`${className} transition-transform duration-300 ${rotate ? 'rotate-180' : ''}`} 
+        fill="none" 
+        stroke="currentColor" 
+        viewBox="0 0 24 24"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" d="M19 9l-7 7-7-7" />
+      </svg>
+    );
+
+    const IconSun = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+    );
+
+    const IconMoon = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+      </svg>
+    );
+
+    const IconGlobe = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+      </svg>
+    );
+
+    const IconKeyLock = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+      </svg>
+    );
+
+    const IconClose = ({ className = "w-6 h-6" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    );
+
+    const IconPhone = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+      </svg>
+    );
+
+    const IconMail = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    );
+
+    const IconMapPin = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    );
+
+    const IconArrowUp = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    );
+
+    const IconCheck = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
+      </svg>
+    );
+
+    const IconSend = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+      </svg>
+    );
+
+    const IconInstagram = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+      </svg>
+    );
+
+    const IconYoutube = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+      </svg>
+    );
+
+    const IconFacebook = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+    );
+
+    const IconLinkedIn = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+      </svg>
+    );
+
+    const IconTwitterX = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg>
+    );
+
+    const IconShieldCheck = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+    );
+
+    const IconZap = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    );
+
+    const IconStethoscope = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.5 4.5v5a7.5 7.5 0 0015 0v-5M8 4.5h-3.5M19.5 4.5H16M12 17v2a3 3 0 006 0v-1m0 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+      </svg>
+    );
+
+    const IconMicroscope = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18h12M7 14h10M12 14v4M9 3l4 4-2 2-4-4 2-2zM14 8l3 3M6 10a6 6 0 006 6" />
+      </svg>
+    );
+
+    const IconDroplet = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 2.5C12 2.5 6 9.8 6 14.5A6 6 0 0018 14.5C18 9.8 12 2.5 12 2.5z" />
+      </svg>
+    );
+
+    const IconSyringe = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18 2l4 4M15 5l4 4M14 6l-9.5 9.5a2.121 2.121 0 000 3l.5.5a2.121 2.121 0 003 0L17.5 9.5M3 21l3-3M9 11l2 2M11 9l2 2" />
+      </svg>
+    );
+
+    const IconDna = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4c2.5 4 7.5 4 10 8s7.5 4 10 8M20 4c-2.5 4-7.5 4-10 8s-7.5 4-10 8M6.5 6.5h11M8.5 17.5h11M4.5 12h15" />
+      </svg>
+    );
+
+    const IconBandage = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <rect x="3" y="8" width="18" height="8" rx="4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" transform="rotate(-45 12 12)" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 11h.01M13 13h.01M11 13h.01M13 11h.01" />
+      </svg>
+    );
+
+    const IconDiamond = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 3h12l4 6-10 12L2 9l4-6zM2 9h20M12 21L8 9l4-6 4 6-4 12z" />
+      </svg>
+    );
+
+    const IconUser = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+      </svg>
+    );
+
+    const IconHome = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+      </svg>
+    );
+
+    const IconLayoutDashboard = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v5a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm10 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zm10-5a1 1 0 011-1h4a1 1 0 011 1v9a1 1 0 01-1 1h-4a1 1 0 01-1-1v-9z" />
+      </svg>
+    );
+
+    const IconClock = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" strokeWidth="2" />
+        <polyline points="12 6 12 12 16 14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+
+    const IconAlertTriangle = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4m0 4h.01" />
+      </svg>
+    );
+
+    const IconNavigation = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <polygon points="3 11 22 2 13 21 11 13 3 11" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+
+    const IconCalendar = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" strokeWidth="2" />
+        <line x1="16" y1="2" x2="16" y2="6" strokeWidth="2" strokeLinecap="round" />
+        <line x1="8" y1="2" x2="8" y2="6" strokeWidth="2" strokeLinecap="round" />
+        <line x1="3" y1="10" x2="21" y2="10" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    );
+
+    const IconCar = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 17H4a2 2 0 01-2-2V5a2 2 0 012-2h16a2 2 0 012 2v10a2 2 0 01-2 2h-1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0m-9-8h6m-6 3h6" />
+      </svg>
+    );
+
+    const IconFileText = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+        <polyline points="14 2 14 8 20 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <line x1="16" y1="13" x2="8" y2="13" strokeWidth="2" strokeLinecap="round" />
+        <line x1="16" y1="17" x2="8" y2="17" strokeWidth="2" strokeLinecap="round" />
+        <polyline points="10 9 9 9 8 9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+
+    const IconUploadCloud = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <polyline points="16 16 12 12 8 16" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <line x1="12" y1="12" x2="12" y2="21" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3" />
+      </svg>
+    );
+
+    const IconMessageSquare = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+      </svg>
+    );
+
+    const IconAward = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="7" strokeWidth="2" />
+        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+
+    const IconCompass = ({ className = "w-4 h-4" }) => (
+      <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" strokeWidth="2" />
+        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" fillOpacity="0.2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    );
+
+    // ==========================================
+    // UNIQUE ANIMATIC LOGO WITH FRAMER MOTION
+    // ==========================================
+    // Dermatology & Cosmetic Concept:
+    // Outer aura = Cellular regeneration & dermal health
+    // Rotating contour = Golden-ratio facial symmetry & precision
+    // Core = Hyaluronic hydration droplet & glowing starburst
+    const AnimaticLogo = ({ isMobile = false }) => {
+      const [hovered, setHovered] = useState(false);
+
+      return (
+        <a 
+          href="index.html" 
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          className="flex items-center gap-2 sm:gap-2.5 group select-none cursor-pointer"
+        >
+          {/* Animated Graphic Emblem (Reduced Size) */}
+          <div className="relative flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 flex-shrink-0">
+            {/* Outer Radiant Glow Aura */}
+            <motion.div 
+              className="absolute inset-0 rounded-full bg-gradient-to-tr from-gold-500/25 via-tealSkin-400/20 to-gold-400/35 blur-[5px] pointer-events-none"
+              animate={{
+                scale: hovered ? [1, 1.2, 1.1] : [1, 1.1, 1],
+                opacity: hovered ? [0.65, 0.95, 0.7] : [0.35, 0.7, 0.35],
+                rotate: [0, 180, 360],
+              }}
+              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+            />
+
+            {/* Micro Dashed Golden Orbit Ring */}
+            <motion.div 
+              className="absolute inset-0 rounded-full border border-dashed border-gold-400/70 dark:border-gold-300/60"
+              animate={{ rotate: 360 }}
+              transition={{ duration: hovered ? 8 : 20, repeat: Infinity, ease: "linear" }}
+            />
+
+            {/* Inner Medical Cyan Ring */}
+            <motion.div 
+              className="absolute inset-1 rounded-full border border-dotted border-tealSkin-500/50 dark:border-tealSkin-400/50"
+              animate={{ rotate: -360 }}
+              transition={{ duration: hovered ? 10 : 25, repeat: Infinity, ease: "linear" }}
+            />
+
+            {/* Center Core: Dermal Droplet & Cosmetic Gem */}
+            <motion.div 
+              className="relative z-10 w-5.5 h-5.5 sm:w-6.5 sm:h-6.5 rounded-lg bg-gradient-to-br from-white via-gold-50 to-gold-200 dark:from-obsidian-850 dark:via-obsidian-800 dark:to-gold-950/70 border border-gold-400/60 dark:border-gold-500/50 shadow-sm flex items-center justify-center overflow-hidden"
+              animate={{
+                scale: hovered ? 1.08 : 1,
+                boxShadow: hovered 
+                  ? "0 0 12px rgba(197, 160, 89, 0.65)" 
+                  : "0 0 6px rgba(197, 160, 89, 0.3)"
+              }}
+              transition={{ type: "spring", stiffness: 350, damping: 20 }}
+            >
+              <svg 
+                className="w-3.5 h-3.5 text-gold-600 dark:text-gold-300" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* Dermal Droplet Contour */}
+                <motion.path 
+                  d="M12 2.5C12 2.5 6 9.8 6 14.5C6 17.8 8.7 20.5 12 20.5C15.3 20.5 18 17.8 18 14.5C18 9.8 12 2.5 12 2.5Z" 
+                  stroke="currentColor" 
+                  strokeWidth="1.8" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  animate={{ pathLength: [0.85, 1, 0.85] }}
+                  transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+                />
+                {/* Center Starburst Sparkle */}
+                <motion.circle 
+                  cx="12" 
+                  cy="14" 
+                  r="2.2" 
+                  fill="#C5A059"
+                  animate={{ scale: [0.9, 1.25, 0.9], opacity: [0.75, 1, 0.75] }}
+                  transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                />
+                {/* Cosmetic Contour curves */}
+                <path 
+                  d="M12 7C9.5 10 9.5 13 12 15C14.5 13 14.5 10 12 7Z" 
+                  fill="currentColor" 
+                  fillOpacity="0.25"
+                />
+              </svg>
+
+              {/* Shimmer line */}
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 dark:via-white/30 to-transparent -skew-x-12"
+                animate={{ x: hovered ? ['-100%', '160%'] : ['-100%', '-100%'] }}
+                transition={{ duration: 0.75, ease: "easeInOut" }}
+              />
+            </motion.div>
+
+            {/* Orbiting micro-pearl */}
+            <motion.div 
+              className="absolute w-1.5 h-1.5 text-gold-400 pointer-events-none"
+              animate={{
+                rotate: 360,
+                x: [10, 0, -10, 0, 10],
+                y: [0, 10, 0, -10, 0],
+              }}
+              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+            >
+              <div className="w-1 h-1 rounded-full bg-gold-400 shadow-[0_0_5px_#C5A059]" />
+            </motion.div>
+          </div>
+
+          {/* Clinic Brand Typography (Refined & Compact) */}
+          <div className="flex flex-col text-left [dir='rtl']:text-right">
+            <div className="flex items-center gap-1 sm:gap-1.5">
+              <span className="font-serif tracking-tight text-sm sm:text-base lg:text-lg font-bold bg-gradient-to-r from-slate-900 via-gold-700 to-slate-800 dark:from-white dark:via-gold-300 dark:to-slate-200 bg-clip-text text-transparent group-hover:via-gold-500 transition-all duration-300">
+                DERMA<span className="font-light italic text-gold-600 dark:text-gold-400">·AURA</span>
+              </span>
+              <span className="inline-flex items-center px-1.5 py-0.2 rounded-full text-[7.5px] sm:text-[8px] font-bold tracking-wider uppercase bg-tealSkin-100 dark:bg-tealSkin-950/80 text-tealSkin-800 dark:text-tealSkin-300 border border-tealSkin-300/40">
+                <span className="w-1 h-1 rounded-full bg-tealSkin-500 animate-pulse mr-1 [dir='rtl']:mr-0 [dir='rtl']:ml-1" />
+                CLINIC
+              </span>
+            </div>
+            <span className="hidden sm:block text-[7.5px] sm:text-[8.5px] font-medium tracking-[0.14em] uppercase text-slate-500 dark:text-slate-400">
+              Dermatology & Cosmetic Skin
+            </span>
+            <span className="block sm:hidden text-[7px] font-medium tracking-[0.12em] uppercase text-slate-500 dark:text-slate-400">
+              Cosmetic Skin Clinic
+            </span>
+          </div>
+        </a>
+      );
+    };
+
+    // ==========================================
+    // 3D BUTTON COMPONENT (3D Extrusion & Press)
+    // ==========================================
+    const Button3D = ({ 
+      children, 
+      onClick, 
+      icon: Icon, 
+      className = "",
+      size = "md" 
+    }) => {
+      const padding = size === "lg" 
+        ? "px-7 py-3.5 text-base w-full" 
+        : "px-4 xl:px-6 py-1.5 xl:py-2 text-[11.5px] xl:text-xs min-w-[85px] xl:min-w-[110px]";
+
+      return (
+        <button
+          onClick={onClick}
+          className={`btn-3d-luxury shimmer-sweep flex items-center justify-center gap-2 ${padding} ${className}`}
+        >
+          {Icon && <Icon className="w-3.5 h-3.5 text-amber-100 flex-shrink-0" />}
+          <span className="font-bold tracking-wide">{children}</span>
+        </button>
+      );
+    };
+
+    // ==========================================
+    // CLINICAL LUXURY FOOTER COMPONENT
+    // Comprehensive content based on all navbar items
+    // ==========================================
+    const Footer = ({ 
+      activeNav, 
+      handleNavClick, 
+      setLoginModal 
+    }) => {
+      const [email, setEmail] = useState("");
+      const [subscribed, setSubscribed] = useState(false);
+
+      const handleSubscribe = (e) => {
+        e.preventDefault();
+        if (email.trim()) {
+          setSubscribed(true);
+          setTimeout(() => {
+            setEmail("");
+            setSubscribed(false);
+          }, 3500);
+        }
+      };
+
+      const treatmentItems = [
+        { icon: IconStethoscope, label: "Acne & Scar Clinical Revision", color: "text-tealSkin-600 dark:text-tealSkin-400" },
+        { icon: IconMicroscope, label: "STEM & Laser Phototherapy", color: "text-gold-600 dark:text-gold-400" },
+        { icon: IconSparkle, label: "Melasma & Pigmentation Laser", color: "text-amber-500 dark:text-amber-400" },
+        { icon: IconDroplet, label: "HydraLaser Cellular Infusion", color: "text-sky-500 dark:text-sky-400" },
+        { icon: IconSyringe, label: "Botox & Facial Rejuvenation", color: "text-rose-500 dark:text-rose-400" },
+        { icon: IconDna, label: "Morpheus8 RF Microneedling", color: "text-tealSkin-600 dark:text-tealSkin-400" },
+        { icon: IconBandage, label: "Mole Mapping & Biopsies", color: "text-emerald-600 dark:text-emerald-400" },
+        { icon: IconDiamond, label: "Chemical Peels & Collagen Glow", color: "text-gold-600 dark:text-gold-400" }
+      ];
+
+      return (
+        <footer className="w-full bg-[#F8F9FA] dark:bg-[#080C14] border-t border-slate-200/90 dark:border-slate-800 text-slate-700 dark:text-slate-300 transition-colors duration-300 select-none">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+              
+              {/* --------------------------------------------------- */}
+              {/* COLUMN 1: BRAND, MISSION, BADGES & SOCIALS          */}
+              {/* --------------------------------------------------- */}
+              <div className="lg:col-span-4 space-y-4 text-left [dir='rtl']:text-right">
+                <AnimaticLogo />
+                
+                <p className="text-xs sm:text-[12.5px] text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">
+                  Derma·Aura is the premier board-certified dermatology and bespoke cosmetic skin clinic. 
+                  Experience cellular regeneration, advanced laser therapies, and tailored aesthetic treatments with zero downtime.
+                </p>
+
+                {/* Two Feature Badges (Matching reference pill layout with Vector Icons) */}
+                <div className="grid grid-cols-2 gap-2.5 pt-1">
+                  <div className="flex items-center gap-2 p-2.5 rounded-xl bg-white dark:bg-obsidian-850/80 border border-slate-200/90 dark:border-slate-800/90 shadow-sm transition-colors">
+                    <div className="w-6 h-6 rounded-lg bg-gold-50 dark:bg-gold-500/10 flex items-center justify-center flex-shrink-0 border border-gold-300/40 dark:border-gold-500/20">
+                      <IconShieldCheck className="w-3.5 h-3.5 text-gold-600 dark:text-gold-400" />
+                    </div>
+                    <div className="leading-tight text-left [dir='rtl']:text-right">
+                      <div className="text-[11px] font-bold text-slate-900 dark:text-white">Board-Certified</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">FAAD & FACS Safe</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 p-2.5 rounded-xl bg-white dark:bg-obsidian-850/80 border border-slate-200/90 dark:border-slate-800/90 shadow-sm transition-colors">
+                    <div className="w-6 h-6 rounded-lg bg-tealSkin-50 dark:bg-tealSkin-500/10 flex items-center justify-center flex-shrink-0 border border-tealSkin-300/40 dark:border-tealSkin-500/20">
+                      <IconZap className="w-3.5 h-3.5 text-tealSkin-600 dark:text-tealSkin-400" />
+                    </div>
+                    <div className="leading-tight text-left [dir='rtl']:text-right">
+                      <div className="text-[11px] font-bold text-slate-900 dark:text-white">FDA-Cleared</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">Laser & RF Suites</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Follow The Clinic & Socials */}
+                <div className="pt-2 space-y-2">
+                  <div className="text-[10px] font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400">
+                    FOLLOW THE CLINIC
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {[
+                      { icon: IconInstagram, label: "Instagram" },
+                      { icon: IconYoutube, label: "YouTube" },
+                      { icon: IconFacebook, label: "Facebook" },
+                      { icon: IconLinkedIn, label: "LinkedIn" },
+                      { icon: IconTwitterX, label: "X" }
+                    ].map(({ icon: Icon, label }) => (
+                      <a
+                        key={label}
+                        href={`#${label.toLowerCase()}`}
+                        title={label}
+                        className="w-8 h-8 rounded-xl bg-white dark:bg-obsidian-850 border border-slate-200 dark:border-slate-800 hover:border-gold-500/60 hover:text-gold-600 dark:hover:text-gold-400 text-slate-600 dark:text-slate-400 flex items-center justify-center transition-all shadow-sm"
+                      >
+                        <Icon className="w-3.5 h-3.5" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* --------------------------------------------------- */}
+              {/* COLUMN 2: EXPLORE DERMA·AURA (Hierarchy with > & •)  */}
+              {/* --------------------------------------------------- */}
+              <div className="lg:col-span-3 space-y-3 text-left [dir='rtl']:text-right">
+                <h4 className="text-xs font-bold tracking-wider uppercase text-slate-900 dark:text-white flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gold-500 dark:bg-gold-400" />
+                  <span>EXPLORE DERMA·AURA</span>
+                </h4>
+                
+                <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-300">
+                  <li>
+                    <button 
+                      onClick={() => handleNavClick("Home")}
+                      className="hover:text-gold-600 dark:hover:text-gold-400 transition-colors flex items-center gap-1.5 font-medium"
+                    >
+                      <span className="text-slate-400 dark:text-slate-500 font-bold">›</span>
+                      <span>Home (Clinical & Cosmetic)</span>
+                    </button>
+                    {/* Indented Sub-links with • */}
+                    <div className="pl-4 [dir='rtl']:pr-4 [dir='rtl']:pl-0 pt-1 space-y-1 text-[11.5px] text-slate-500 dark:text-slate-400">
+                      <button 
+                        onClick={() => handleNavClick("Home", "Home 1")}
+                        className="hover:text-gold-600 dark:hover:text-gold-400 transition-colors block text-left [dir='rtl']:text-right"
+                      >
+                        • Home 1 (Medical Dermatology)
+                      </button>
+                      <button 
+                        onClick={() => handleNavClick("Home", "Home 2")}
+                        className="hover:text-gold-600 dark:hover:text-gold-400 transition-colors block text-left [dir='rtl']:text-right"
+                      >
+                        • Home 2 (Cosmetic & Laser)
+                      </button>
+                    </div>
+                  </li>
+                  {[
+                    { label: "About Us", target: "About" },
+                    { label: "How It Works", target: "How It Works" },
+                    { label: "Doctors & Faculty", target: "Doctors" },
+                    { label: "Treatments Directory", target: "Treatments" },
+                    { label: "Before & After Gallery", target: "Before & After" },
+                    { label: "Clinic Locations", target: "Clinic" },
+                    { label: "Hygiene & Safety Protocols", target: "About" },
+                    { label: "FAQs & Tele-Health", target: "Clinic" },
+                    { label: "Contact Us", target: "Contact" }
+                  ].map((item) => (
+                    <li key={item.label}>
+                      <button 
+                        onClick={() => handleNavClick(item.target)}
+                        className="hover:text-gold-600 dark:hover:text-gold-400 transition-colors flex items-center gap-1.5"
+                      >
+                        <span className="text-slate-400 dark:text-slate-500 font-bold">›</span>
+                        <span>{item.label}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* --------------------------------------------------- */}
+              {/* COLUMN 3: TREATMENTS & CARE (Thematic Vector Icons) */}
+              {/* --------------------------------------------------- */}
+              <div className="lg:col-span-2 space-y-3 text-left [dir='rtl']:text-right">
+                <h4 className="text-xs font-bold tracking-wider uppercase text-slate-900 dark:text-white flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gold-500 dark:bg-gold-400" />
+                  <span>TREATMENTS & CARE</span>
+                </h4>
+                
+                <ul className="space-y-2 text-xs">
+                  {treatmentItems.map((treatment) => (
+                    <li key={treatment.label}>
+                      <button 
+                        onClick={() => handleNavClick("Treatments")}
+                        className="hover:text-gold-600 dark:hover:text-gold-400 transition-colors flex items-center gap-2 text-left [dir='rtl']:text-right group"
+                      >
+                        <treatment.icon className={`w-3.5 h-3.5 flex-shrink-0 ${treatment.color} group-hover:scale-110 transition-transform`} />
+                        <span className="text-slate-600 dark:text-slate-300 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">
+                          {treatment.label}
+                        </span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* --------------------------------------------------- */}
+              {/* COLUMN 4: PORTALS & NEWSLETTER (Buttons + Card)     */}
+              {/* --------------------------------------------------- */}
+              <div className="lg:col-span-3 space-y-3 text-left [dir='rtl']:text-right">
+                <h4 className="text-xs font-bold tracking-wider uppercase text-slate-900 dark:text-white flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gold-500 dark:bg-gold-400" />
+                  <span>PORTALS & NEWSLETTER</span>
+                </h4>
+
+                {/* User Dashboard Card Button */}
+                <button 
+                  onClick={() => handleNavClick("Dashboard", "User Dashboard")}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white dark:bg-obsidian-850/90 border border-slate-200 dark:border-slate-800 hover:border-gold-500/60 hover:bg-gold-50/40 dark:hover:bg-obsidian-800 transition-all font-semibold text-xs text-slate-800 dark:text-white shadow-sm"
+                >
+                  <div className="w-6 h-6 rounded-lg bg-gold-50 dark:bg-gold-500/10 flex items-center justify-center flex-shrink-0 border border-gold-300/40 dark:border-gold-500/20">
+                    <IconUser className="w-3.5 h-3.5 text-gold-600 dark:text-gold-400" />
+                  </div>
+                  <span>User Dashboard</span>
+                </button>
+
+                {/* Admin Dashboard Card Button */}
+                <button 
+                  onClick={() => handleNavClick("Dashboard", "Admin Dashboard")}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white dark:bg-obsidian-850/90 border border-slate-200 dark:border-slate-800 hover:border-gold-500/60 hover:bg-gold-50/40 dark:hover:bg-obsidian-800 transition-all font-semibold text-xs text-slate-800 dark:text-white shadow-sm"
+                >
+                  <div className="w-6 h-6 rounded-lg bg-gold-50 dark:bg-gold-500/10 flex items-center justify-center flex-shrink-0 border border-gold-300/40 dark:border-gold-500/20">
+                    <IconShieldCheck className="w-3.5 h-3.5 text-gold-600 dark:text-gold-400" />
+                  </div>
+                  <span>Admin Dashboard</span>
+                </button>
+
+                {/* Newsletter Box (Responsive Light & Dark Background) */}
+                <div className="rounded-2xl p-4 bg-white dark:bg-obsidian-850/80 border border-slate-200/90 dark:border-slate-800/90 space-y-2.5 shadow-sm mt-2 transition-colors">
+                  <div className="space-y-1">
+                    <h5 className="font-bold text-xs text-slate-900 dark:text-white flex items-center gap-1.5">
+                      <span>Join Derma·Aura Family!</span>
+                      <IconSparkle className="w-3.5 h-3.5 text-amber-500" />
+                    </h5>
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                      Get free clinical skin guides and $50 off your first clinical treatment.
+                    </p>
+                  </div>
+
+                  <form onSubmit={handleSubscribe} className="space-y-2">
+                    <input
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="patient@email.com"
+                      className="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700/80 bg-slate-50 dark:bg-obsidian-950 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-xs focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-all shadow-inner"
+                    />
+                    <button
+                      type="submit"
+                      className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#D7B976] via-[#C5A059] to-[#A9833D] hover:from-[#E6C887] hover:to-[#C5A059] text-white font-bold text-xs shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                    >
+                      <IconSend className="w-3.5 h-3.5" />
+                      <span>{subscribed ? "Subscribed!" : "Subscribe"}</span>
+                      {subscribed && <IconCheck className="w-3.5 h-3.5" />}
+                    </button>
+                  </form>
+                  {subscribed && (
+                    <p className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold text-center flex items-center justify-center gap-1">
+                      <IconCheck className="w-3 h-3" />
+                      <span>Welcome to the Derma·Aura clinical family!</span>
+                    </p>
+                  )}
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </footer>
+      );
+    };
+
+// ==========================================
+// 7 UNIQUE & CREATIVE CONTACT SECTIONS
+// ==========================================
+
+// ------------------------------------------
+// SECTION 1: CONTACT CONCIERGE & CLINICAL GATEWAY
+// ------------------------------------------
+const ContactGatewaySection = () => {
+  const [activeChannel, setActiveChannel] = useState(0);
+
+  const channels = [
+    {
+      id: "admissions",
+      title: "New Patients & Clinical Admissions",
+      tagline: "First-Time Consultations & Treatment Inquiries",
+      phone: "(800) 337-6222",
+      phoneRaw: "+18003376222",
+      email: "admissions@derma-aura.com",
+      hours: "Mon–Fri: 8:00 AM – 8:00 PM EST",
+      response: "Under 15 Minutes Response Guarantee",
+      desc: "Connect directly with our patient advisory team for comprehensive treatment plans, doctor credentials, and first-time visit scheduling."
+    },
+    {
+      id: "referrals",
+      title: "Physician Referrals & EHR Records",
+      tagline: "Medical Colleague Network & Pathology Transfers",
+      phone: "(800) 337-DOCS",
+      phoneRaw: "+18003373627",
+      email: "referrals@derma-aura.com",
+      hours: "Mon–Sat: 8:00 AM – 6:00 PM EST",
+      response: "Direct Medical Officer Line",
+      desc: "For attending dermatologists, oncologists, and plastic surgeons transferring diagnostic biopsy slides, dermoscopic records, or urgent patient referrals."
+    },
+    {
+      id: "vip",
+      title: "VIP Concierge & International Desk",
+      tagline: "Discreet Executive Care & Multilingual Support",
+      phone: "+1 (212) 555-0199",
+      phoneRaw: "+12125550199",
+      email: "vip@derma-aura.com",
+      hours: "Available 24/7 for Traveling Patients",
+      response: "Dedicated Private Concierge Liaison",
+      desc: "Bespoke itineraries, private subterranean elevator access, and multilingual translation services (English, French, Arabic, Mandarin)."
+    }
+  ];
+
+  return (
+    <section id="contact-gateway" className="relative py-16 sm:py-24 overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80">
+      {/* Background ambient lighting */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gold-400/10 dark:bg-gold-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-tealSkin-400/10 dark:bg-tealSkin-500/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Section Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.65 }}
+          className="text-center max-w-3xl mx-auto mb-14 sm:mb-18"
+        >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-100/90 dark:bg-gold-950/70 border border-gold-300 dark:border-gold-500/40 text-gold-800 dark:text-gold-300 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+            <IconSparkle className="w-4 h-4 text-gold-600 dark:text-gold-400" />
+            <span>Direct Clinical Gateway • Priority Access</span>
+          </div>
+          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
+            Direct Communication With Our <br className="hidden sm:block" />
+            <span className="bg-gradient-to-r from-gold-600 via-amber-500 to-gold-700 dark:from-gold-300 dark:via-amber-300 dark:to-gold-500 bg-clip-text text-transparent">
+              Dermatology & Aesthetic Concierge
+            </span>
+          </h1>
+          <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+            Whether you require an initial diagnostic consultation, a physician-to-physician pathology transfer, or confidential VIP concierge assistance, our dedicated medical coordinators ensure immediate response.
+          </p>
+        </motion.div>
+
+        {/* Unique Framer Motion: Floating Glassmorphic Diagonal Cascade */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          
+          {/* Left Column: Visual Showcase with Live Concierge Badge */}
+          <motion.div 
+            initial={{ opacity: 0, x: -35, y: 25 }}
+            whileInView={{ opacity: 1, x: 0, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7 relative group"
+          >
+            <div className="relative rounded-3xl overflow-hidden border-2 border-gold-400/30 dark:border-gold-500/30 shadow-2xl bg-slate-100 dark:bg-obsidian-850">
+              <img 
+                src="images/contact_concierge_hero.jpg" 
+                alt="Derma Aura Clinical Concierge Desk" 
+                className="w-full h-[380px] sm:h-[480px] object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent pointer-events-none" />
+
+              {/* Live Reception Status Badge */}
+              <div className="absolute top-4 left-4 sm:top-5 sm:left-5 backdrop-blur-md bg-white/95 dark:bg-obsidian-900/95 border border-slate-200 dark:border-slate-700 rounded-2xl p-3 sm:p-4 shadow-xl max-w-xs">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
+                  <span className="text-[11px] font-bold tracking-wider uppercase text-emerald-700 dark:text-emerald-400">
+                    Live Concierge Desk: Online
+                  </span>
+                </div>
+                <p className="text-xs text-slate-700 dark:text-slate-200 font-medium">
+                  Average phone wait time: under 30 seconds. Multilingual staff on duty.
+                </p>
+              </div>
+
+              {/* Bottom Card for Selected Channel */}
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 backdrop-blur-md bg-white/95 dark:bg-obsidian-900/95 border border-slate-200/80 dark:border-slate-700/80 rounded-2xl p-4 sm:p-5 shadow-xl text-left [dir='rtl']:text-right">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-gold-600 dark:text-gold-400 bg-gold-50 dark:bg-gold-950/70 px-2.5 py-0.5 rounded-full border border-gold-300/40">
+                    {channels[activeChannel].response}
+                  </span>
+                  <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400">
+                    {channels[activeChannel].hours}
+                  </span>
+                </div>
+                <h4 className="font-serif text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+                  {channels[activeChannel].title}
+                </h4>
+                <div className="mt-3 flex flex-wrap gap-2.5">
+                  <a 
+                    href={`tel:${channels[activeChannel].phoneRaw}`} 
+                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-gold-500 text-slate-950 font-bold text-xs shadow-md hover:bg-gold-400 transition-colors"
+                  >
+                    <IconPhone className="w-3.5 h-3.5" />
+                    <span>{channels[activeChannel].phone}</span>
+                  </a>
+                  <a 
+                    href={`mailto:${channels[activeChannel].email}`} 
+                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-obsidian-850 text-slate-800 dark:text-slate-100 font-bold text-xs hover:border-gold-400 transition-colors"
+                  >
+                    <IconMail className="w-3.5 h-3.5 text-gold-500" />
+                    <span>{channels[activeChannel].email}</span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </motion.div>
+
+          {/* Right Column: Interactive Channel Switcher Cards */}
+          <div className="lg:col-span-5 space-y-3.5 sm:space-y-4">
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">
+              Select Inquiry Department:
+            </div>
+            {channels.map((chan, idx) => {
+              const isSelected = activeChannel === idx;
+              return (
+                <div
+                  key={chan.id}
+                  onClick={() => setActiveChannel(idx)}
+                  className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer text-left [dir='rtl']:text-right ${
+                    isSelected
+                      ? "bg-white dark:bg-obsidian-850 border-gold-500 dark:border-gold-400 shadow-xl ring-2 ring-gold-500/20"
+                      : "bg-white/80 dark:bg-obsidian-900/60 border-slate-200 dark:border-slate-800 hover:border-gold-300 dark:hover:border-gold-500/40"
+                  }`}
+                >
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h4 className="font-serif text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+                        {chan.title}
+                      </h4>
+                      <span className="text-[11px] text-gold-600 dark:text-gold-400 font-semibold block mt-0.5">
+                        {chan.tagline}
+                      </span>
+                    </div>
+                    <span className={`w-2.5 h-2.5 rounded-full mt-1.5 ${isSelected ? 'bg-gold-500 animate-pulse' : 'bg-slate-300 dark:bg-slate-700'}`} />
+                  </div>
+                  <p className="text-xs text-slate-600 dark:text-slate-300 font-light mt-2 leading-relaxed">
+                    {chan.desc}
+                  </p>
+                  <div className="mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
+                    <span className="font-mono font-bold text-slate-700 dark:text-slate-200 flex items-center gap-1.5">
+                      <IconPhone className="w-3.5 h-3.5 text-gold-500" />
+                      <span>{chan.phone}</span>
+                    </span>
+                    <span className="font-bold text-tealSkin-600 dark:text-tealSkin-400 text-[11px]">
+                      {chan.response.split(" ")[0]} {chan.response.split(" ")[1]}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+// ------------------------------------------
+// SECTION 2: CLINICAL ADDRESS & ARCHITECTURAL ARRIVAL
+// ------------------------------------------
+const ClinicAddressSection = () => {
+  return (
+    <section id="clinic-address" className="relative py-16 sm:py-24 overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80 bg-slate-50/50 dark:bg-obsidian-950/40">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Section Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.65 }}
+          className="text-center max-w-3xl mx-auto mb-14 sm:mb-18"
+        >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-tealSkin-100/90 dark:bg-tealSkin-950/70 border border-tealSkin-300 dark:border-tealSkin-500/40 text-tealSkin-800 dark:text-tealSkin-300 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+            <IconMapPin className="w-4 h-4 text-tealSkin-600 dark:text-tealSkin-400" />
+            <span>Clinic Address & VIP Arrival</span>
+          </div>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
+            The Aesthetic Boulevard Sanctuary: <br className="hidden sm:block" />
+            <span className="bg-gradient-to-r from-tealSkin-600 via-tealSkin-500 to-gold-600 dark:from-tealSkin-300 dark:via-tealSkin-400 dark:to-gold-400 bg-clip-text text-transparent">
+              Discreet Physical Address
+            </span>
+          </h2>
+          <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+            Nestled in the heart of the prestige medical district, Derma·Aura offers subterranean white-glove valet, direct executive elevator transit, and absolute confidentiality from arrival to departure.
+          </p>
+        </motion.div>
+
+        {/* Unique Framer Motion: Geometric Pinpoint Reveal & Card Stack */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          {/* Left Column: Visual Architectural View with Geocoordinates Pin */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.94 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.75, ease: "easeOut" }}
+            className="lg:col-span-7 relative group"
+          >
+            <div className="relative rounded-3xl overflow-hidden border-2 border-tealSkin-400/30 dark:border-tealSkin-500/30 shadow-2xl bg-slate-100 dark:bg-obsidian-850">
+              <img 
+                src="images/contact_clinic_location.jpg" 
+                alt="Derma Aura Aesthetic Boulevard Entrance" 
+                className="w-full h-[380px] sm:h-[480px] object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/20 pointer-events-none" />
+
+              {/* Target Coordinates Overlay Chip */}
+              <div className="absolute top-4 left-4 sm:top-5 sm:left-5 backdrop-blur-md bg-white/95 dark:bg-obsidian-900/95 border border-slate-200 dark:border-slate-700 rounded-2xl p-3 sm:p-4 shadow-xl flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gold-500 text-slate-950 flex items-center justify-center font-bold">
+                  <IconCompass className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 block">Spatial GPS Coordinates</span>
+                  <span className="text-xs sm:text-sm font-mono font-bold text-slate-900 dark:text-white">
+                    34.0736° N, 118.4004° W
+                  </span>
+                </div>
+              </div>
+
+              {/* Main Address Presentation Bar */}
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 backdrop-blur-md bg-white/95 dark:bg-obsidian-900/95 border border-slate-200/80 dark:border-slate-700/80 rounded-2xl p-4 sm:p-5 shadow-xl text-left [dir='rtl']:text-right">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="w-2 h-2 rounded-full bg-tealSkin-500" />
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-tealSkin-600 dark:text-tealSkin-400">
+                    Official Registered Medical Facility
+                  </span>
+                </div>
+                <h3 className="font-serif text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+                  742 Aesthetic Boulevard, Suite 400
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-light mt-0.5">
+                  Beverly Hills Medical Corridor • Floor 4 Private Surgical Suites
+                </p>
+              </div>
+
+            </div>
+          </motion.div>
+
+          {/* Right Column: 3 Arrival Perks & Directions */}
+          <div className="lg:col-span-5 space-y-4">
+            
+            <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-obsidian-850 border border-slate-200 dark:border-slate-800 shadow-md">
+              <div className="flex items-start gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-gold-100 dark:bg-gold-950/70 text-gold-700 dark:text-gold-300 flex items-center justify-center flex-shrink-0">
+                  <IconCar className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="font-serif text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+                    White-Glove Subterranean Valet
+                  </h4>
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-light mt-1">
+                    Complimentary sheltered parking with license plate recognition and climate-regulated vehicle staging upon your departure.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-obsidian-850 border border-slate-200 dark:border-slate-800 shadow-md">
+              <div className="flex items-start gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-tealSkin-100 dark:bg-tealSkin-950/70 text-tealSkin-700 dark:text-tealSkin-300 flex items-center justify-center flex-shrink-0">
+                  <IconKeyLock className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="font-serif text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+                    Discreet VIP Direct Elevator
+                  </h4>
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-light mt-1">
+                    Express elevator directly from subterranean valet to Floor 4 consultation chambers, bypassing all public lobby areas.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-obsidian-850 border border-slate-200 dark:border-slate-800 shadow-md">
+              <div className="flex items-start gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 flex items-center justify-center flex-shrink-0">
+                  <IconNavigation className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="font-serif text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+                    Metropolitan & Heliport Proximity
+                  </h4>
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-light mt-1">
+                    3 minutes from Beverly Trauma Center Heliport; 20 minutes from Los Angeles International Airport (LAX).
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Action Button */}
+            <div className="pt-2">
+              <a
+                href="#interactive-map"
+                className="w-full py-3 rounded-xl border border-gold-400/40 bg-gold-50 dark:bg-gold-950/50 hover:bg-gold-100 dark:hover:bg-gold-900/60 text-gold-800 dark:text-gold-300 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-colors shadow-sm"
+              >
+                <IconNavigation className="w-4 h-4" />
+                <span>Jump to Interactive Campus Map</span>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+// ------------------------------------------
+// SECTION 3: INTERACTIVE GOOGLE MAPS & CAMPUS NAVIGATION
+// ------------------------------------------
+const InteractiveMapSection = () => {
+  const [mapMode, setMapMode] = useState("street");
+  const [activePin, setActivePin] = useState(0);
+
+  const landmarks = [
+    { id: 0, title: "Main Medical Pavilion & Valet Drop-off", desc: "North Entrance: 742 Aesthetic Blvd. Covered valet drop-off bay with automated registration.", coords: "34.0736° N, 118.4004° W" },
+    { id: 1, title: "Private VIP West Wing Entrance", desc: "West Entrance: Discreet private door for scheduled surgical procedures and confidential visits.", coords: "34.0738° N, 118.4009° W" },
+    { id: 2, title: "Diagnostic AI Skin Imaging Core", desc: "East Wing Floor 4: 3D photogrammetry rooms and biometric evaluation suites.", coords: "34.0734° N, 118.4001° W" },
+    { id: 3, title: "Underground Patient Parking Hub", desc: "Subterranean Level P1 & P2: 60 reserved spaces with Tesla & universal EV fast chargers.", coords: "34.0735° N, 118.4003° W" }
+  ];
+
+  return (
+    <section id="interactive-map" className="relative py-16 sm:py-24 overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Section Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.65 }}
+          className="text-center max-w-3xl mx-auto mb-14 sm:mb-18"
+        >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-100/90 dark:bg-gold-950/70 border border-gold-300 dark:border-gold-500/40 text-gold-800 dark:text-gold-300 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+            <IconNavigation className="w-4 h-4 text-gold-600 dark:text-gold-400" />
+            <span>Interactive Google Maps & Campus Locator</span>
+          </div>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
+            Interactive Campus Navigation & <br className="hidden sm:block" />
+            <span className="bg-gradient-to-r from-gold-600 via-amber-500 to-gold-700 dark:from-gold-300 dark:via-amber-300 dark:to-gold-500 bg-clip-text text-transparent">
+              Turn-by-Turn GPS Mapping
+            </span>
+          </h2>
+          <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+            Explore our clinical campus before your journey. Switch between clinical street view and high-resolution satellite imagery to locate private entrances and valet parking.
+          </p>
+        </motion.div>
+
+        {/* Unique Framer Motion: Radar Sonar Sweep & Pin Drop Spring */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          {/* Left Column: Interactive Map Viewport (Styled Luxury Vector Map) */}
+          <div className="lg:col-span-8 relative">
+            <div className="relative rounded-3xl overflow-hidden border-2 border-gold-400/40 dark:border-gold-500/40 shadow-2xl bg-slate-900 min-h-[420px] sm:min-h-[500px] flex items-center justify-center">
+              
+              {/* Map Canvas Background: Stylized Dark/Light Medical Aesthetic Map */}
+              <div className={`absolute inset-0 transition-opacity duration-500 ${mapMode === "street" ? "bg-[#0B111E]" : "bg-[#070A0F]"}`}>
+                {/* Stylized Grid Lines simulating modern map cartography */}
+                <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#C5A059_1px,transparent_1px),linear-gradient(to_bottom,#C5A059_1px,transparent_1px)] bg-[size:40px_40px]" />
+                
+                {/* Street arteries */}
+                <svg className="w-full h-full opacity-40" viewBox="0 0 800 500" fill="none">
+                  <path d="M0 250 H800" stroke="#C5A059" strokeWidth="6" />
+                  <path d="M400 0 V500" stroke="#2DD4BF" strokeWidth="5" />
+                  <path d="M150 0 L650 500" stroke="#86642A" strokeWidth="3" strokeDasharray="6 6" />
+                  <circle cx="400" cy="250" r="90" stroke="#C5A059" strokeWidth="2" strokeDasharray="4 4" />
+                </svg>
+
+                {/* Rotating Sonar Radar Pulse */}
+                <motion.div 
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-gradient-to-tr from-transparent via-gold-500/10 to-transparent pointer-events-none"
+                />
+              </div>
+
+              {/* Map Mode Switcher in Top Right */}
+              <div className="absolute top-4 right-4 z-20 flex items-center gap-1 p-1 bg-slate-950/80 backdrop-blur-md rounded-xl border border-slate-700">
+                <button
+                  onClick={() => setMapMode("street")}
+                  className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
+                    mapMode === "street" ? "bg-gold-500 text-slate-950" : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  Street Grid
+                </button>
+                <button
+                  onClick={() => setMapMode("satellite")}
+                  className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
+                    mapMode === "satellite" ? "bg-tealSkin-500 text-white" : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  Satellite View
+                </button>
+              </div>
+
+              {/* Center Clinic Flagship Pin */}
+              <div className="relative z-10 flex flex-col items-center cursor-pointer">
+                <motion.div 
+                  animate={{ scale: [1, 1.15, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  className="w-14 h-14 rounded-full bg-gold-500 text-slate-950 shadow-2xl flex items-center justify-center font-bold ring-8 ring-gold-400/30"
+                >
+                  <IconMapPin className="w-7 h-7" />
+                </motion.div>
+                <div className="mt-2 px-3 py-1 rounded-lg bg-slate-950/90 border border-gold-400/60 text-gold-300 text-xs font-bold shadow-lg">
+                  DERMA·AURA FLAGSHIP
+                </div>
+              </div>
+
+              {/* Interactive Satellite Hotspot Pins */}
+              <div 
+                onClick={() => setActivePin(1)}
+                className="absolute top-1/4 left-1/4 z-10 cursor-pointer flex items-center gap-1.5 p-1.5 rounded-xl bg-slate-900/90 border border-tealSkin-400/50 hover:scale-105 transition-transform"
+              >
+                <span className="w-2.5 h-2.5 rounded-full bg-tealSkin-400 animate-ping" />
+                <span className="text-[10.5px] font-bold text-tealSkin-300">VIP West Wing</span>
+              </div>
+
+              <div 
+                onClick={() => setActivePin(3)}
+                className="absolute bottom-1/4 right-1/4 z-10 cursor-pointer flex items-center gap-1.5 p-1.5 rounded-xl bg-slate-900/90 border border-gold-400/50 hover:scale-105 transition-transform"
+              >
+                <IconCar className="w-3.5 h-3.5 text-gold-400" />
+                <span className="text-[10.5px] font-bold text-gold-300">Valet Garage P1</span>
+              </div>
+
+              {/* Bottom Telemetry GPS Bar */}
+              <div className="absolute bottom-4 left-4 right-4 z-20 backdrop-blur-md bg-slate-950/90 border border-slate-800 rounded-2xl p-4 text-white flex flex-col sm:flex-row items-center justify-between gap-3 text-left [dir='rtl']:text-right">
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-gold-400 block">Active Campus Landmark</span>
+                  <h4 className="font-serif text-sm sm:text-base font-bold text-white">
+                    {landmarks[activePin].title}
+                  </h4>
+                  <p className="text-xs text-slate-300 font-light mt-0.5">
+                    {landmarks[activePin].desc}
+                  </p>
+                </div>
+                <a
+                  href="https://maps.google.com/?q=Beverly+Hills+CA" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-bold text-xs whitespace-nowrap flex items-center gap-1.5 transition-colors shadow-md"
+                >
+                  <IconNavigation className="w-3.5 h-3.5" />
+                  <span>Launch Google Maps GPS</span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+          {/* Right Column: Campus Landmarks & Transit Matrix */}
+          <div className="lg:col-span-4 space-y-4">
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">
+              Select Campus Zone:
+            </div>
+            {landmarks.map((mark, idx) => {
+              const isSelected = activePin === idx;
+              return (
+                <div
+                  key={mark.id}
+                  onClick={() => setActivePin(idx)}
+                  className={`p-3.5 sm:p-4 rounded-2xl border transition-all cursor-pointer text-left [dir='rtl']:text-right ${
+                    isSelected
+                      ? "bg-white dark:bg-obsidian-850 border-gold-500 dark:border-gold-400 shadow-lg ring-1 ring-gold-500/30"
+                      : "bg-white/80 dark:bg-obsidian-900/60 border-slate-200 dark:border-slate-800 hover:border-gold-300 dark:hover:border-gold-500/40"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <h5 className="font-serif text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
+                      {mark.title}
+                    </h5>
+                    <span className={`w-2 h-2 rounded-full ${isSelected ? 'bg-gold-500' : 'bg-slate-300 dark:bg-slate-700'}`} />
+                  </div>
+                  <span className="text-[10.5px] font-mono text-slate-500 dark:text-slate-400 block mt-1">
+                    {mark.coords}
+                  </span>
+                </div>
+              );
+            })}
+
+            {/* Travel Times Quick Card */}
+            <div className="p-4 rounded-2xl bg-white dark:bg-obsidian-850 border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+              <span className="text-[10px] uppercase font-bold text-slate-400 block mb-2">
+                Estimated Transit Times
+              </span>
+              <div className="grid grid-cols-3 gap-2">
+                <div className="p-2 rounded-xl bg-slate-50 dark:bg-obsidian-900">
+                  <span className="text-[9px] text-slate-400 block uppercase font-bold">LAX Airport</span>
+                  <span className="text-xs font-bold text-slate-800 dark:text-slate-100 font-mono">24 mins</span>
+                </div>
+                <div className="p-2 rounded-xl bg-slate-50 dark:bg-obsidian-900">
+                  <span className="text-[9px] text-slate-400 block uppercase font-bold">Downtown</span>
+                  <span className="text-xs font-bold text-slate-800 dark:text-slate-100 font-mono">18 mins</span>
+                </div>
+                <div className="p-2 rounded-xl bg-slate-50 dark:bg-obsidian-900">
+                  <span className="text-[9px] text-slate-400 block uppercase font-bold">Heliport</span>
+                  <span className="text-xs font-bold text-tealSkin-600 dark:text-tealSkin-400 font-mono">3 mins</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+// ------------------------------------------
+// SECTION 4: URGENT CARE & 24/7 DERMATOLOGICAL EMERGENCY
+// ------------------------------------------
+const EmergencyContactSection = () => {
+  return (
+    <section id="emergency-contact" className="relative py-16 sm:py-24 overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80 bg-rose-50/30 dark:bg-rose-950/10">
+      
+      {/* Subtle alert accent top bar */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 via-amber-500 to-rose-500" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Section Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.65 }}
+          className="text-center max-w-3xl mx-auto mb-14 sm:mb-18"
+        >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-100 dark:bg-rose-950/70 border border-rose-300 dark:border-rose-500/40 text-rose-800 dark:text-rose-300 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+            <IconAlertTriangle className="w-4 h-4 text-rose-600 dark:text-rose-400" />
+            <span>24/7 Clinical Emergency Hotline</span>
+          </div>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
+            Urgent Dermal Triage & <br className="hidden sm:block" />
+            <span className="bg-gradient-to-r from-rose-600 via-amber-500 to-rose-700 dark:from-rose-400 dark:via-amber-300 dark:to-rose-400 bg-clip-text text-transparent">
+              Post-Procedure Emergency Support
+            </span>
+          </h2>
+          <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+            For post-operative patients experiencing unexpected acute symptoms, vascular discoloration, or severe blistering. Our attending surgical dermatologists are reachable 24 hours a day, 365 days a year.
+          </p>
+        </motion.div>
+
+        {/* Unique Framer Motion: Emergency Heartbeat Pulse & Shield Border Flash */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          
+          {/* Left Column: Visual with On-Call Triage Indicator */}
+          <div className="lg:col-span-6 relative group">
+            <div className="relative rounded-3xl overflow-hidden border-2 border-rose-400/40 dark:border-rose-500/40 shadow-2xl bg-slate-100 dark:bg-obsidian-850">
+              <img 
+                src="images/contact_emergency_triage.jpg" 
+                alt="Derma Aura Emergency Triage Support" 
+                className="w-full h-[380px] sm:h-[460px] object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent pointer-events-none" />
+
+              {/* On-Call Doctor Active Badge */}
+              <div className="absolute top-4 left-4 sm:top-5 sm:left-5 backdrop-blur-md bg-white/95 dark:bg-obsidian-900/95 border border-rose-300 dark:border-rose-600 rounded-2xl p-3 shadow-xl flex items-center gap-3">
+                <span className="w-3 h-3 rounded-full bg-rose-500 animate-ping" />
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-rose-600 dark:text-rose-400 block">
+                    Attending Physician On Call
+                  </span>
+                  <span className="text-xs font-bold text-slate-800 dark:text-slate-100">
+                    Dr. Julian Rivera, MD • Resident Triage
+                  </span>
+                </div>
+              </div>
+
+              {/* Direct Urgent Callout Box */}
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 backdrop-blur-md bg-white/95 dark:bg-obsidian-900/95 border border-slate-200/80 dark:border-slate-700/80 rounded-2xl p-4 sm:p-5 shadow-xl text-left [dir='rtl']:text-right">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 block mb-1">
+                  Dedicated Emergency Line (24/7/365)
+                </span>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <span className="font-serif text-2xl sm:text-3xl font-bold text-rose-600 dark:text-rose-400 tracking-tight">
+                    (800) 911-SKIN
+                  </span>
+                  <a
+                    href="tel:+18009117546"
+                    className="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-rose-600/30 transition-all"
+                  >
+                    <IconPhone className="w-4 h-4" />
+                    <span>Dial Emergency Line</span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          {/* Right Column: Triage Protocol Checklist */}
+          <div className="lg:col-span-6 space-y-4">
+            
+            <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-obsidian-850 border border-slate-200 dark:border-slate-800 shadow-md">
+              <h4 className="font-serif text-base font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-2">
+                <IconAlertTriangle className="w-4 h-4 text-amber-500" />
+                <span>When to Call the Emergency Triage Line:</span>
+              </h4>
+              <ul className="space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-light">
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-1.5 flex-shrink-0" />
+                  <span><strong>Vascular Occlusion / Blanching:</strong> White discoloration, severe mottled erythema, or unusual localized pain following dermal filler injections.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-1.5 flex-shrink-0" />
+                  <span><strong>Blistering & Burns:</strong> Excessive epidermal blistering or thermal discomfort post-fractional ablative laser treatments.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-1.5 flex-shrink-0" />
+                  <span><strong>Acute Biopsy Site Bleeding:</strong> Persistent bleeding from minor surgical or Mohs micrographic excision sites.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-1.5 flex-shrink-0" />
+                  <span><strong>Anaphylactoid Reaction:</strong> Rapid facial swelling, hives, or breathing tightness following any clinical medication.</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Photo Triage Instructions */}
+            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-rose-500/10 via-amber-500/10 to-transparent border border-rose-300/50 dark:border-rose-500/30">
+              <h5 className="font-serif text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+                Encrypted Dermal Photo Triage
+              </h5>
+              <p className="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed font-light">
+                Registered patients can transmit high-resolution clinical photographs directly to our emergency on-call console via the HIPAA patient portal for immediate evaluation by the attending surgical team.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+// ------------------------------------------
+// SECTION 5: CLINIC OPERATING HOURS & DOCTOR AVAILABILITY SCHEDULE
+// ------------------------------------------
+const BusinessHoursSection = () => {
+  const [activeDoctor, setActiveDoctor] = useState(0);
+
+  const hours = [
+    { days: "Monday – Thursday", time: "8:00 AM – 8:00 PM", badge: "Extended Evening Clinic", focus: "Medical Dermatology, Laser Pavilion & Mohs Surgery" },
+    { days: "Friday", time: "8:00 AM – 7:00 PM", badge: "Full Service", focus: "Aesthetic Contouring, Botox, Dermal Fillers & Skin Health" },
+    { days: "Saturday", time: "9:00 AM – 5:00 PM", badge: "Weekend Aesthetics", focus: "VIP Cosmetic Concierge, Laser Glow & Post-Op Reviews" },
+    { days: "Sunday", time: "Urgent Care & On-Call Only", badge: "Sterilization Day", focus: "Full Clinic Cleanroom Deep Sterilization & 24/7 Hotline" }
+  ];
+
+  const doctorsSchedule = [
+    {
+      name: "Dr. Sophia Lin, MD",
+      role: "Director of Dermatologic Surgery",
+      days: "Mon, Wed, Fri",
+      hours: "8:30 AM – 4:30 PM",
+      focus: "Mohs Micrographic Surgery & Complex Melanoma Diagnostics"
+    },
+    {
+      name: "Dr. Marcus Sterling, MD",
+      role: "Senior Laser Surgery Fellow",
+      days: "Tue, Thu, Sat",
+      hours: "9:00 AM – 6:00 PM",
+      focus: "PicoSure Pro, Sciton HALO & Acne Scar Reconstruction"
+    },
+    {
+      name: "Dr. Elena Vance, MD",
+      role: "Aesthetic Medicine Specialist",
+      days: "Mon, Thu, Sat",
+      hours: "10:00 AM – 7:00 PM",
+      focus: "Full-Face Liquid Contouring & Biostimulatory Injectables"
+    },
+    {
+      name: "Dr. Julian Rivera, MD",
+      role: "Clinical Dermatologist & Trichologist",
+      days: "Tue, Wed, Fri",
+      hours: "8:00 AM – 5:00 PM",
+      focus: "Alopecia Cartography, Psoriasis & Chronic Acne Protocols"
+    }
+  ];
+
+  return (
+    <section id="business-hours" className="relative py-16 sm:py-24 overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Section Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.65 }}
+          className="text-center max-w-3xl mx-auto mb-14 sm:mb-18"
+        >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-100/90 dark:bg-gold-950/70 border border-gold-300 dark:border-gold-500/40 text-gold-800 dark:text-gold-300 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+            <IconClock className="w-4 h-4 text-gold-600 dark:text-gold-400" />
+            <span>Business Hours & Doctor Availability</span>
+          </div>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
+            Comprehensive Clinical Hours & <br className="hidden sm:block" />
+            <span className="bg-gradient-to-r from-gold-600 via-amber-500 to-gold-700 dark:from-gold-300 dark:via-amber-300 dark:to-gold-500 bg-clip-text text-transparent">
+              Doctor Consultation Schedules
+            </span>
+          </h2>
+          <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+            We provide extended morning and evening appointment slots to accommodate busy executive calendars, along with weekend aesthetic consultation hours.
+          </p>
+        </motion.div>
+
+        {/* Unique Framer Motion: Time-Dial Rotation & Accordion Shift Wave */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          
+          {/* Left Column: Weekly Operating Hours Matrix */}
+          <div className="lg:col-span-6 space-y-4">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Weekly Clinic Schedule</span>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 text-xs font-bold border border-emerald-300/40">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Currently Open</span>
+              </span>
+            </div>
+
+            {hours.map((item, idx) => (
+              <div
+                key={idx}
+                className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-obsidian-850 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-gold-300 dark:hover:border-gold-500/40 transition-all text-left [dir='rtl']:text-right"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-2">
+                  <h4 className="font-serif text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+                    {item.days}
+                  </h4>
+                  <span className="text-xs sm:text-sm font-mono font-bold text-gold-600 dark:text-gold-400">
+                    {item.time}
+                  </span>
+                </div>
+                <div className="mt-2 flex items-center justify-between text-xs">
+                  <span className="text-slate-500 dark:text-slate-400 font-light">
+                    {item.focus}
+                  </span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-100 dark:bg-obsidian-800 text-slate-700 dark:text-slate-300">
+                    {item.badge}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Right Column: Doctor On-Duty Interactive Schedule */}
+          <div className="lg:col-span-6 space-y-4">
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+              Doctor On-Duty Consultation Roster:
+            </div>
+
+            {doctorsSchedule.map((doc, idx) => {
+              const isSelected = activeDoctor === idx;
+              return (
+                <div
+                  key={idx}
+                  onClick={() => setActiveDoctor(idx)}
+                  className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer text-left [dir='rtl']:text-right ${
+                    isSelected
+                      ? "bg-white dark:bg-obsidian-850 border-tealSkin-500 dark:border-tealSkin-400 shadow-xl ring-2 ring-tealSkin-500/20"
+                      : "bg-white/80 dark:bg-obsidian-900/60 border-slate-200 dark:border-slate-800 hover:border-tealSkin-300 dark:hover:border-tealSkin-500/40"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="font-serif text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+                        {doc.name}
+                      </h4>
+                      <span className="text-xs text-tealSkin-600 dark:text-tealSkin-400 font-medium block">
+                        {doc.role}
+                      </span>
+                    </div>
+                    <span className="px-2.5 py-1 rounded-lg bg-tealSkin-100 dark:bg-tealSkin-950/70 border border-tealSkin-300/50 text-tealSkin-800 dark:text-tealSkin-300 text-xs font-bold font-mono">
+                      {doc.days}
+                    </span>
+                  </div>
+
+                  {isSelected && (
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 space-y-1.5 text-xs text-slate-600 dark:text-slate-300 font-light"
+                    >
+                      <div className="flex justify-between items-center text-[11px]">
+                        <span className="font-bold text-slate-700 dark:text-slate-300">Consultation Hours:</span>
+                        <span className="font-mono text-gold-600 dark:text-gold-400 font-bold">{doc.hours}</span>
+                      </div>
+                      <p className="text-[11.5px] text-slate-600 dark:text-slate-300 font-light">
+                        Clinical Focus: {doc.focus}
+                      </p>
+                    </motion.div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+// ------------------------------------------
+// SECTION 6: INTERACTIVE APPOINTMENT ENQUIRY & TREATMENT ESTIMATOR
+// ------------------------------------------
+const AppointmentEnquirySection = () => {
+  const [selectedConcern, setSelectedConcern] = useState("laser");
+  const [consultFormat, setConsultFormat] = useState("in_person");
+  const [preferredTime, setPreferredTime] = useState("morning");
+
+  const concerns = [
+    { id: "laser", title: "Laser & Pigmentation", fee: "$250 Consultation", applyRule: "100% credited toward same-day procedure" },
+    { id: "acne", title: "Acne & Scar Reconstruction", fee: "$225 Consultation", applyRule: "Includes 3D multispectral pore analysis" },
+    { id: "antiaging", title: "Facial Contouring & Fillers", fee: "$275 Consultation", applyRule: "Includes anatomical ultrasound facial mapping" },
+    { id: "surgical", title: "Mohs Surgery & Skin Cancer", fee: "$350 Consultation", applyRule: "Direct evaluation by Chief Dermatologic Surgeon" }
+  ];
+
+  return (
+    <section id="appointment-enquiry" className="relative py-16 sm:py-24 overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80 bg-slate-50/50 dark:bg-obsidian-950/40">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Section Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.65 }}
+          className="text-center max-w-3xl mx-auto mb-14 sm:mb-18"
+        >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-tealSkin-100/90 dark:bg-tealSkin-950/70 border border-tealSkin-300 dark:border-tealSkin-500/40 text-tealSkin-800 dark:text-tealSkin-300 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+            <IconCalendar className="w-4 h-4 text-tealSkin-600 dark:text-tealSkin-400" />
+            <span>Appointment Enquiry & Consultation Estimator</span>
+          </div>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
+            Personalized Appointment Enquiry & <br className="hidden sm:block" />
+            <span className="bg-gradient-to-r from-tealSkin-600 via-tealSkin-500 to-gold-600 dark:from-tealSkin-300 dark:via-tealSkin-400 dark:to-gold-400 bg-clip-text text-transparent">
+              Pre-Consultation Planner
+            </span>
+          </h2>
+          <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+            Configure your desired clinical concern, preferred consultation format, and receive immediate transparent fee guidance prior to booking.
+          </p>
+        </motion.div>
+
+        {/* Unique Framer Motion: Step Progression Slider & Dynamic Spring Unfold */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          
+          {/* Left Column: Interactive Planner Tool */}
+          <div className="lg:col-span-7 space-y-6">
+            
+            {/* Step 1: Select Concern */}
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">
+                Step 1: Select Primary Clinical Concern
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {concerns.map((c) => (
+                  <button
+                    key={c.id}
+                    onClick={() => setSelectedConcern(c.id)}
+                    className={`p-3.5 rounded-2xl border text-left [dir='rtl']:text-right transition-all ${
+                      selectedConcern === c.id
+                        ? "bg-white dark:bg-obsidian-850 border-gold-500 dark:border-gold-400 shadow-lg ring-2 ring-gold-500/20"
+                        : "bg-white/80 dark:bg-obsidian-900/60 border-slate-200 dark:border-slate-800 hover:border-gold-300"
+                    }`}
+                  >
+                    <span className="font-serif text-sm font-bold text-slate-900 dark:text-white block">
+                      {c.title}
+                    </span>
+                    <span className="text-xs font-mono font-bold text-gold-600 dark:text-gold-400 block mt-1">
+                      {c.fee}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Step 2: Format */}
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">
+                Step 2: Consultation Format
+              </span>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  onClick={() => setConsultFormat("in_person")}
+                  className={`p-3.5 rounded-2xl border text-center transition-all ${
+                    consultFormat === "in_person"
+                      ? "bg-white dark:bg-obsidian-850 border-tealSkin-500 dark:border-tealSkin-400 shadow-md ring-2 ring-tealSkin-500/20 font-bold"
+                      : "bg-white/80 dark:bg-obsidian-900/60 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300"
+                  }`}
+                >
+                  <span className="text-xs sm:text-sm block font-serif">In-Person Private Suite</span>
+                  <span className="text-[10px] text-tealSkin-600 dark:text-tealSkin-400 block mt-0.5">Floor 4 Pavilion</span>
+                </button>
+                <button
+                  onClick={() => setConsultFormat("telehealth")}
+                  className={`p-3.5 rounded-2xl border text-center transition-all ${
+                    consultFormat === "telehealth"
+                      ? "bg-white dark:bg-obsidian-850 border-tealSkin-500 dark:border-tealSkin-400 shadow-md ring-2 ring-tealSkin-500/20 font-bold"
+                      : "bg-white/80 dark:bg-obsidian-900/60 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300"
+                  }`}
+                >
+                  <span className="text-xs sm:text-sm block font-serif">Telehealth HD Video</span>
+                  <span className="text-[10px] text-tealSkin-600 dark:text-tealSkin-400 block mt-0.5">Encrypted Web Portal</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Step 3: Time Preference */}
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">
+                Step 3: Preferred Time Window
+              </span>
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 text-center">
+                {[
+                  { id: "morning", label: "Morning", sub: "8am – 12pm" },
+                  { id: "afternoon", label: "Afternoon", sub: "12pm – 5pm" },
+                  { id: "evening", label: "Evening", sub: "5pm – 8pm" }
+                ].map((t) => (
+                  <button
+                    key={t.id}
+                    onClick={() => setPreferredTime(t.id)}
+                    className={`p-2.5 rounded-xl border transition-all ${
+                      preferredTime === t.id
+                        ? "bg-gold-500 text-slate-950 font-bold shadow-md"
+                        : "bg-white dark:bg-obsidian-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300"
+                    }`}
+                  >
+                    <span className="text-xs block font-serif">{t.label}</span>
+                    <span className="text-[10px] opacity-80 block">{t.sub}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+          </div>
+
+          {/* Right Column: Visual Summary Card & Fast Booking Gateway */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative rounded-3xl overflow-hidden border-2 border-gold-400/40 dark:border-gold-500/40 shadow-2xl bg-white dark:bg-obsidian-850 p-6 sm:p-7 text-left [dir='rtl']:text-right">
+              <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+                <span className="text-xs font-bold uppercase tracking-wider text-gold-600 dark:text-gold-400">
+                  Enquiry Estimation Summary
+                </span>
+                <span className="w-2.5 h-2.5 rounded-full bg-gold-500 animate-ping" />
+              </div>
+
+              <div className="my-5 space-y-3.5">
+                <div>
+                  <span className="text-[11px] text-slate-400 uppercase font-bold block">Selected Specialty:</span>
+                  <span className="font-serif text-lg font-bold text-slate-900 dark:text-white">
+                    {concerns.find(c => c.id === selectedConcern)?.title}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-[11px] text-slate-400 uppercase font-bold block">Diagnostic Fee:</span>
+                  <span className="font-serif text-xl font-extrabold text-gold-600 dark:text-gold-400">
+                    {concerns.find(c => c.id === selectedConcern)?.fee}
+                  </span>
+                  <p className="text-[11.5px] text-slate-500 dark:text-slate-400 mt-0.5">
+                    {concerns.find(c => c.id === selectedConcern)?.applyRule}
+                  </p>
+                </div>
+                <div>
+                  <span className="text-[11px] text-slate-400 uppercase font-bold block">Session Mode & Time:</span>
+                  <span className="text-sm font-semibold text-slate-800 dark:text-slate-200">
+                    {consultFormat === "in_person" ? "In-Person Suite (Beverly Hills)" : "Telehealth Encrypted Video"} • {preferredTime.toUpperCase()} window
+                  </span>
+                </div>
+              </div>
+
+              <div className="pt-3 border-t border-slate-100 dark:border-slate-800">
+                <a
+                  href="#contact-form"
+                  className="btn-3d-luxury shimmer-sweep w-full py-3.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2"
+                >
+                  <IconSend className="w-4 h-4 text-amber-100" />
+                  <span>Proceed to Finalize Enquiry Form</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+// ------------------------------------------
+// SECTION 7: SECURE CLINICAL CONTACT FORM & DIRECT TRIAGE
+// ------------------------------------------
+const ContactFormSection = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    topic: "general",
+    preferredContact: "phone",
+    message: ""
+  });
+  const [submitted, setSubmitted] = useState(false);
+  const [photoAttached, setPhotoAttached] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  return (
+    <section id="contact-form" className="relative py-16 sm:py-24 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Section Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.65 }}
+          className="text-center max-w-3xl mx-auto mb-14 sm:mb-18"
+        >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-100/90 dark:bg-gold-950/70 border border-gold-300 dark:border-gold-500/40 text-gold-800 dark:text-gold-300 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+            <IconMessageSquare className="w-4 h-4 text-gold-600 dark:text-gold-400" />
+            <span>Encrypted Contact Form & Medical Triage</span>
+          </div>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
+            Submit Your Confidential Inquiry & <br className="hidden sm:block" />
+            <span className="bg-gradient-to-r from-gold-600 via-amber-500 to-gold-700 dark:from-gold-300 dark:via-amber-300 dark:to-gold-500 bg-clip-text text-transparent">
+              Direct Clinical Consultation Request
+            </span>
+          </h2>
+          <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+            All messages are encrypted with 256-bit SSL protocols in compliance with HIPAA privacy standards. Our clinical coordinators reply within 15 minutes during operating hours.
+          </p>
+        </motion.div>
+
+        {/* Unique Framer Motion: Form Shimmer Aperture Glide */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          
+          {/* Left Column: Clinical Communication Desk Visual */}
+          <div className="lg:col-span-5 relative group">
+            <div className="relative rounded-3xl overflow-hidden border-2 border-gold-400/30 dark:border-gold-500/30 shadow-2xl bg-slate-100 dark:bg-obsidian-850">
+              <img 
+                src="images/contact_communication_desk.jpg" 
+                alt="Derma Aura Medical Communication Room" 
+                className="w-full h-[400px] sm:h-[500px] object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent pointer-events-none" />
+
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 text-white text-left [dir='rtl']:text-right">
+                <div className="inline-block px-2.5 py-1 rounded-md bg-gold-500 text-slate-950 text-[10px] font-bold uppercase tracking-wider mb-2">
+                  HIPAA-Compliant Encrypted Channel
+                </div>
+                <h3 className="font-serif text-lg sm:text-xl font-bold">
+                  Direct Doctor-Patient Communication Channel
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-300 font-light mt-1">
+                  Transmitted directly to our on-duty clinical coordinator and electronic health record (EHR) gateway.
+                </p>
+              </div>
+            </div>
+
+            {/* Quick Helpline Pill */}
+            <div className="mt-4 p-4 rounded-2xl bg-white dark:bg-obsidian-850 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between text-left [dir='rtl']:text-right">
+              <div>
+                <span className="text-[10px] uppercase font-bold text-slate-400 block">Direct Concierge Phone</span>
+                <span className="font-mono text-sm font-bold text-slate-800 dark:text-slate-100">(800) 337-6222</span>
+              </div>
+              <a
+                href="tel:+18003376222"
+                className="p-2.5 rounded-xl bg-gold-100 dark:bg-gold-950/60 text-gold-700 dark:text-gold-300 hover:bg-gold-200 transition-colors"
+              >
+                <IconPhone className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+
+          {/* Right Column: Interactive Contact Form */}
+          <div className="lg:col-span-7">
+            <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-obsidian-850 border-2 border-gold-400/30 dark:border-gold-500/30 shadow-2xl text-left [dir='rtl']:text-right">
+              
+              {submitted ? (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="py-10 text-center space-y-4"
+                >
+                  <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/70 border-2 border-emerald-400 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto shadow-xl">
+                    <IconCheck className="w-8 h-8" />
+                  </div>
+                  <span className="inline-block px-3 py-1 rounded-full bg-gold-100 dark:bg-gold-950/70 text-gold-800 dark:text-gold-300 text-xs font-mono font-bold">
+                    Ticket Ref: #DA-84920
+                  </span>
+                  <h3 className="font-serif text-2xl font-bold text-slate-900 dark:text-white">
+                    Inquiry Confirmed & Encrypted
+                  </h3>
+                  <p className="text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto font-light leading-relaxed">
+                    Thank you, {formData.name || "Patient"}. Your message has been routed to our attending clinical coordinator. We will reach you via {formData.preferredContact} within 15 minutes.
+                  </p>
+                  <button
+                    onClick={() => {
+                      setSubmitted(false);
+                      setPhotoAttached(false);
+                    }}
+                    className="px-6 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-bold text-slate-700 dark:text-slate-300 hover:border-gold-400 transition-colors"
+                  >
+                    Submit Another Message
+                  </button>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5">
+                        Full Name *
+                      </label>
+                      <input 
+                        type="text" 
+                        required
+                        value={formData.name}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        placeholder="e.g. Eleanor Vance"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-obsidian-900 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20 transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5">
+                        Phone Number *
+                      </label>
+                      <input 
+                        type="tel" 
+                        required
+                        value={formData.phone}
+                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                        placeholder="+1 (555) 000-0000"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-obsidian-900 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20 transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5">
+                        Email Address *
+                      </label>
+                      <input 
+                        type="email" 
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        placeholder="patient@example.com"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-obsidian-900 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20 transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5">
+                        Inquiry Topic *
+                      </label>
+                      <select 
+                        value={formData.topic}
+                        onChange={(e) => setFormData({...formData, topic: e.target.value})}
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-obsidian-900 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20 transition-all"
+                      >
+                        <option value="general">General Clinical Inquiries</option>
+                        <option value="laser">Laser Resurfacing & Phototherapy</option>
+                        <option value="injectables">Aesthetic Injectables & Contouring</option>
+                        <option value="medical">Medical Dermatology & Skin Pathology</option>
+                        <option value="postop">Post-Procedure Clinical Review</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5">
+                      Clinical Message / Health Goals
+                    </label>
+                    <textarea 
+                      rows="4" 
+                      required
+                      value={formData.message}
+                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                      placeholder="Please describe your dermal concerns, previous procedures, or specific doctor preferences..."
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-obsidian-900 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20 transition-all"
+                    />
+                  </div>
+
+                  {/* Optional Dermal Photo Attachment Dropzone */}
+                  <div 
+                    onClick={() => setPhotoAttached(!photoAttached)}
+                    className={`p-3.5 rounded-2xl border-2 border-dashed transition-all cursor-pointer flex items-center justify-between ${
+                      photoAttached 
+                        ? "border-emerald-400 bg-emerald-50/50 dark:bg-emerald-950/30 text-emerald-800 dark:text-emerald-300"
+                        : "border-slate-200 dark:border-slate-700 hover:border-gold-400 bg-slate-50/50 dark:bg-obsidian-900"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <IconUploadCloud className="w-5 h-5 text-gold-500" />
+                      <div>
+                        <span className="text-xs font-bold block">
+                          {photoAttached ? "dermal_concern_scan_01.jpg Attached" : "Attach Confidential Dermal Photo (Optional)"}
+                        </span>
+                        <span className="text-[10px] text-slate-400 block">
+                          JPEG, PNG, DICOM up to 25MB • HIPAA-Protected Storage
+                        </span>
+                      </div>
+                    </div>
+                    <span className="text-xs font-bold px-2.5 py-1 rounded-lg bg-white dark:bg-obsidian-800 border border-slate-200 dark:border-slate-700">
+                      {photoAttached ? "Remove" : "Browse"}
+                    </span>
+                  </div>
+
+                  <div className="pt-2">
+                    <Button3D size="lg">
+                      Submit Confidential Medical Inquiry
+                    </Button3D>
+                  </div>
+                </form>
+              )}
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+
+    // ==========================================
+    // MAIN APP COMPONENT
+    // ==========================================
+    function App() {
+      // Dark Mode
+      const [isDark, setIsDark] = useState(false);
+      // RTL Mode
+      const [isRTL, setIsRTL] = useState(false);
+      // Mobile Drawer State
+      const [mobileOpen, setMobileOpen] = useState(false);
+      // Desktop Active Dropdown
+      const [activeDropdown, setActiveDropdown] = useState(null);
+      // Mobile Accordions
+      const [mobileAccordion, setMobileAccordion] = useState({ home: false, dashboard: false });
+      // Active nav link
+      const [activeNav, setActiveNav] = useState("Contact");
+      // Login Modal
+      const [loginModal, setLoginModal] = useState(false);
+      const [loginTab, setLoginTab] = useState("patient");
+
+      // Laptop View vs iPad Pro / Tablet / Mobile View state
+      const [isLaptopView, setIsLaptopView] = useState(() => {
+        if (typeof window === 'undefined') return true;
+        const ua = navigator.userAgent || '';
+        const isIPad = /iPad/i.test(ua) || ((navigator.platform === 'MacIntel' || /Macintosh/i.test(ua)) && navigator.maxTouchPoints > 1);
+        return window.innerWidth > 1024 && !isIPad;
+      });
+
+      useEffect(() => {
+        const updateLayout = () => {
+          const ua = navigator.userAgent || '';
+          const isIPad = /iPad/i.test(ua) || ((navigator.platform === 'MacIntel' || /Macintosh/i.test(ua)) && navigator.maxTouchPoints > 1);
+          setIsLaptopView(window.innerWidth > 1024 && !isIPad);
+        };
+        updateLayout();
+        window.addEventListener('resize', updateLayout);
+        return () => window.removeEventListener('resize', updateLayout);
+      }, []);
+
+      // Initialize theme based on document class or preference
+      useEffect(() => {
+        if (document.documentElement.classList.contains('dark')) {
+          setIsDark(true);
+        }
+      }, []);
+
+      // Toggle Dark Mode
+      const toggleDarkMode = () => {
+        setIsDark(prev => {
+          const next = !prev;
+          if (next) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+          } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+          }
+          return next;
+        });
+      };
+
+      // Toggle RTL Mode
+      const toggleRTL = () => {
+        setIsRTL(prev => {
+          const next = !prev;
+          if (next) {
+            document.documentElement.setAttribute('dir', 'rtl');
+          } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+          }
+          return next;
+        });
+      };
+
+      const handleNavClick = (name, sub = null) => {
+        setActiveNav(name);
+        setActiveDropdown(null);
+        setMobileOpen(false);
+
+        const routes = {
+          "Home": "index.html",
+          "Home 1": "index.html",
+          "Home 2": "home-2.html",
+          "About": "about.html",
+          "About Us": "about.html",
+          "Treatments": "treatments.html",
+          "Treatments Directory": "treatments.html",
+          "Doctors": "doctors.html",
+          "Doctors & Faculty": "doctors.html",
+          "Before & After": "before-&-after.html",
+          "Before & After Gallery": "before-&-after.html",
+          "How It Works": "how-it-works.html",
+          "Clinic": "clinic.html",
+          "Clinic Locations": "clinic.html",
+          "Contact": "contact.html",
+          "Contact Us": "contact.html",
+          "User Dashboard": "user-dashboard.html",
+          "Admin Dashboard": "admin-dashboard.html"
+        };
+
+        const target = sub || name;
+        if (routes[target]) {
+          window.location.href = routes[target];
+        } else if (routes[name]) {
+          window.location.href = routes[name];
+        }
+      };
+
+      // Navigation Structure
+      const menuData = {
+        home: [
+          { 
+            name: "Home 1", 
+            badge: "Medical", 
+            desc: "Clinical Dermatology, Acne & Pathology", 
+            icon: IconStethoscope 
+          },
+          { 
+            name: "Home 2", 
+            badge: "Aesthetics", 
+            desc: "Cosmetic Artistry, Botox & Laser Glow", 
+            icon: IconSparkle 
+          }
+        ],
+        dashboard: [
+          { 
+            name: "Admin Dashboard", 
+            badge: "Staff & Doctors", 
+            desc: "Clinic Operations, Appointments & EHR Analytics", 
+            icon: IconLayoutDashboard 
+          },
+          { 
+            name: "User Dashboard", 
+            badge: "Patient Portal", 
+            desc: "Prescriptions, Skin Health Log & Bookings", 
+            icon: IconUser 
+          }
+        ]
+      };
+
+      const navLinks = [
+        "About",
+        "Treatments",
+        "Doctors",
+        "Before & After",
+        "How It Works",
+        "Clinic",
+        "Contact"
+      ];
+
+      return (
+        <div className="min-h-screen flex flex-col justify-between transition-colors duration-400">
+          
+          {/* ========================================================= */}
+          {/* MAIN NAVBAR CONTAINER */}
+          {/* Laptop: Left Logo | Center Menu | Right (RTL icon, Dark toggle, 3D Login) */}
+          {/* Tab/Mobile: Left Logo | Right Hamburger (All other inside) */}
+          {/* ========================================================= */}
+          <header className="sticky top-0 z-40 w-full bg-white/90 dark:bg-obsidian-900/90 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800/80 py-2.5 shadow-md shadow-black/5 transition-all">
+            <div className="max-w-7xl mx-auto px-3 sm:px-5 lg:px-6 xl:px-8">
+              <div className="w-full flex items-center justify-between relative">
+                
+                {/* --------------------------------------------------- */}
+                {/* 1. LEFT: ANIMATIC LOGO (Moved to Left Side & Reduced Size) */}
+                {/* --------------------------------------------------- */}
+                <div className="flex-1 flex justify-start items-center">
+                  <AnimaticLogo />
+                </div>
+
+                {/* --------------------------------------------------- */}
+                {/* 2. CENTER: NAVBAR MAIN MENU (Placed in Center in Laptop View) */}
+                {/* --------------------------------------------------- */}
+                {isLaptopView && (
+                  <nav className="flex items-center justify-center space-x-0.5 xl:space-x-1 [dir='rtl']:space-x-reverse shrink-0">
+                    
+                    {/* --- Home Dropdown (Shows ONLY Home 1 and Home 2 on hover) --- */}
+                    <div 
+                      className="relative"
+                      onMouseEnter={() => setActiveDropdown("home")}
+                      onMouseLeave={() => setActiveDropdown(null)}
+                    >
+                      <button 
+                        onClick={() => handleNavClick("Home")}
+                        className={`flex items-center gap-1 px-1.5 py-1 xl:px-2.5 xl:py-1 rounded-md text-[10.5px] xl:text-[11.5px] font-medium tracking-wide transition-all duration-150 ${
+                        activeNav.startsWith("Home")
+                          ? 'text-gold-700 bg-gold-100/90 border border-gold-300/80 shadow-sm dark:bg-gold-500/20 dark:text-gold-300 dark:border-gold-500/40 dark:shadow-[0_0_12px_rgba(197,160,89,0.2)]' 
+                          : 'text-slate-700 dark:text-slate-200 hover:text-gold-700 dark:hover:text-gold-300 hover:bg-slate-100/80 dark:hover:bg-white/10 border border-transparent'
+                      }`}
+                    >
+                      <span>Home</span>
+                      <IconChevronDown rotate={activeDropdown === "home"} className="w-2.5 h-2.5 text-slate-400 dark:text-slate-300" />
+                    </button>
+
+                    {/* Home Dropdown with Framer Motion: Shows ONLY Home 1 and Home 2 */}
+                    <AnimatePresence>
+                      {activeDropdown === "home" && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 6, scale: 0.96 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 4, scale: 0.96 }}
+                          transition={{ duration: 0.15 }}
+                          className="absolute left-1/2 -translate-x-1/2 mt-1.5 w-32 py-1 px-1 bg-white dark:bg-obsidian-900 rounded-xl shadow-xl border border-gold-400/30 dark:border-gold-500/25 z-50 overflow-hidden"
+                        >
+                          <button
+                            onClick={() => handleNavClick("Home", "Home 1")}
+                            className="w-full text-left [dir='rtl']:text-right px-2.5 py-1.5 rounded-lg text-[11px] font-medium text-slate-700 dark:text-slate-200 hover:text-gold-700 dark:hover:text-gold-300 hover:bg-gold-50/80 dark:hover:bg-gold-500/20 transition-colors"
+                          >
+                            Home 1
+                          </button>
+                          <button
+                            onClick={() => handleNavClick("Home", "Home 2")}
+                            className="w-full text-left [dir='rtl']:text-right px-2.5 py-1.5 rounded-lg text-[11px] font-medium text-slate-700 dark:text-slate-200 hover:text-gold-700 dark:hover:text-gold-300 hover:bg-gold-50/80 dark:hover:bg-gold-500/20 transition-colors"
+                          >
+                            Home 2
+                          </button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* --- Standard Nav Links --- */}
+                  {navLinks.map((link) => (
+                    <button
+                      key={link}
+                      onClick={() => handleNavClick(link)}
+                      className={`px-1.5 py-1 xl:px-2.5 xl:py-1 rounded-md text-[10.5px] xl:text-[11.5px] font-medium tracking-wide transition-all duration-150 flex items-center gap-1 ${
+                        activeNav === link
+                          ? 'text-gold-700 bg-gold-100/90 border border-gold-300/80 shadow-sm dark:bg-gold-500/20 dark:text-gold-300 dark:border-gold-500/40 dark:shadow-[0_0_12px_rgba(197,160,89,0.2)]'
+                          : 'text-slate-700 dark:text-slate-200 hover:text-gold-700 dark:hover:text-gold-300 hover:bg-slate-100/80 dark:hover:bg-white/10 border border-transparent'
+                      }`}
+                    >
+                      <span>{link}</span>
+                      {link === "Before & After" && (
+                        <span className="w-1.5 h-1.5 rounded-full bg-tealSkin-500 animate-ping" />
+                      )}
+                    </button>
+                  ))}
+
+                  {/* --- Dashboard Dropdown (Shows ONLY Admin Dashboard and User Dashboard on hover) --- */}
+                  <div 
+                    className="relative"
+                    onMouseEnter={() => setActiveDropdown("dashboard")}
+                    onMouseLeave={() => setActiveDropdown(null)}
+                  >
+                    <button 
+                      onClick={() => setActiveDropdown(activeDropdown === "dashboard" ? null : "dashboard")}
+                      className={`flex items-center gap-1 px-1.5 py-1 xl:px-2.5 xl:py-1 rounded-md text-[10.5px] xl:text-[11.5px] font-medium tracking-wide transition-all duration-150 ${
+                        activeNav.startsWith("Dashboard")
+                          ? 'text-gold-700 bg-gold-100/90 border border-gold-300/80 shadow-sm dark:bg-gold-500/20 dark:text-gold-300 dark:border-gold-500/40 dark:shadow-[0_0_12px_rgba(197,160,89,0.2)]' 
+                          : 'text-slate-700 dark:text-slate-200 hover:text-gold-700 dark:hover:text-gold-300 hover:bg-slate-100/80 dark:hover:bg-white/10 border border-transparent'
+                      }`}
+                    >
+                      <span>Dashboard</span>
+                      <IconChevronDown rotate={activeDropdown === "dashboard"} className="w-2.5 h-2.5 text-slate-400 dark:text-slate-300" />
+                    </button>
+
+                    {/* Shows ONLY Admin Dashboard and User Dashboard */}
+                    <AnimatePresence>
+                      {activeDropdown === "dashboard" && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 6, scale: 0.96 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 4, scale: 0.96 }}
+                          transition={{ duration: 0.15 }}
+                          className="absolute left-1/2 -translate-x-1/2 mt-1.5 w-36 py-1 px-1 bg-white dark:bg-obsidian-900 rounded-xl shadow-xl border border-gold-400/30 dark:border-gold-500/25 z-50 overflow-hidden"
+                        >
+                          <button
+                            onClick={() => handleNavClick("Dashboard", "Admin Dashboard")}
+                            className="w-full text-left [dir='rtl']:text-right px-2.5 py-1.5 rounded-lg text-[11px] font-medium text-slate-700 dark:text-slate-200 hover:text-gold-700 dark:hover:text-gold-300 hover:bg-gold-50/80 dark:hover:bg-gold-500/20 transition-colors"
+                          >
+                            Admin Dashboard
+                          </button>
+                          <button
+                            onClick={() => handleNavClick("Dashboard", "User Dashboard")}
+                            className="w-full text-left [dir='rtl']:text-right px-2.5 py-1.5 rounded-lg text-[11px] font-medium text-slate-700 dark:text-slate-200 hover:text-gold-700 dark:hover:text-gold-300 hover:bg-gold-50/80 dark:hover:bg-gold-500/20 transition-colors"
+                          >
+                            User Dashboard
+                          </button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                </nav>
+                )}
+
+                {/* --------------------------------------------------- */}
+                {/* 3. RIGHT (Laptop View): TOGGLES & 3D LOGIN BUTTON   */}
+                {/* --------------------------------------------------- */}
+                {isLaptopView && (
+                <div className="flex flex-1 justify-end items-center gap-1.5 xl:gap-2.5">
+                  
+                  {/* Right to Left (RTL) Toggle: ONLY ICON as requested */}
+                  <button
+                    onClick={toggleRTL}
+                    title={isRTL ? "Switch to LTR" : "Switch to RTL"}
+                    className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-obsidian-850 hover:border-gold-400 dark:hover:border-gold-500 text-slate-700 dark:text-slate-200 shadow-sm transition-all"
+                  >
+                    <IconGlobe className="w-4 h-4 text-gold-500" />
+                  </button>
+
+                  {/* Dark Mode Toggle */}
+                  <button
+                    onClick={toggleDarkMode}
+                    title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                    className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-obsidian-850 hover:border-gold-400 dark:hover:border-gold-500 text-slate-700 dark:text-slate-200 shadow-sm transition-all"
+                  >
+                    {isDark ? (
+                      <IconSun className="w-4 h-4 text-amber-400" />
+                    ) : (
+                      <IconMoon className="w-4 h-4 text-slate-600" />
+                    )}
+                  </button>
+
+                  {/* 3D LOGIN BUTTON (Laptop View) */}
+                  <Button3D
+                    icon={IconKeyLock}
+                    onClick={() => window.location.href = 'login.html'}
+                  >
+                    Login
+                  </Button3D>
+
+                </div>
+                )}
+
+                {/* --------------------------------------------------- */}
+                {/* 4. RIGHT (Tablet & Mobile View): ONLY HAMBURGER     */}
+                {/* As requested: logo on left, hamburger on right      */}
+                {/* --------------------------------------------------- */}
+                {!isLaptopView && (
+                <div className="flex items-center">
+                  <motion.button
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => setMobileOpen(!mobileOpen)}
+                    aria-label="Toggle Mobile Menu"
+                    className="p-2.5 rounded-xl border border-gold-400/50 dark:border-gold-500/40 bg-gold-50/70 dark:bg-obsidian-850 text-gold-700 dark:text-gold-300 shadow-sm"
+                  >
+                    <div className="w-5 h-4 flex flex-col justify-between items-center">
+                      <motion.span 
+                        animate={mobileOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                        className="w-5 h-0.5 bg-current rounded-full transition-transform origin-center"
+                      />
+                      <motion.span 
+                        animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
+                        className="w-5 h-0.5 bg-current rounded-full transition-opacity"
+                      />
+                      <motion.span 
+                        animate={mobileOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                        className="w-5 h-0.5 bg-current rounded-full transition-transform origin-center"
+                      />
+                    </div>
+                  </motion.button>
+                </div>
+                )}
+
+              </div>
+            </div>
+          </header>
+
+          {/* ========================================================= */}
+          {/* MOBILE & TABLET HAMBURGER DRAWER                          */}
+          {/* ALL remaining items inside hamburger menu as requested:   */}
+          {/* Nav links, Dropdowns, Dark Mode, RTL, and 3D Login        */}
+          {/* ========================================================= */}
+          <AnimatePresence>
+            {!isLaptopView && mobileOpen && (
+              <>
+                {/* Backdrop Blur */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setMobileOpen(false)}
+                  className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+                />
+
+                {/* Slide-in Drawer */}
+                <motion.div
+                  initial={{ x: isRTL ? '-100%' : '100%' }}
+                  animate={{ x: 0 }}
+                  exit={{ x: isRTL ? '-100%' : '100%' }}
+                  transition={{ type: "spring", damping: 25, stiffness: 260 }}
+                  className="fixed top-0 bottom-0 right-0 [dir='rtl']:right-auto [dir='rtl']:left-0 z-50 w-full max-w-sm bg-white dark:bg-obsidian-900 border-l [dir='rtl']:border-l-0 [dir='rtl']:border-r border-gold-500/20 shadow-2xl flex flex-col overflow-hidden"
+                >
+                  {/* Drawer Header */}
+                  <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                    <AnimaticLogo isMobile={true} />
+                    <button
+                      onClick={() => setMobileOpen(false)}
+                      className="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+                    >
+                      <IconClose className="w-5 h-5" />
+                    </button>
+                  </div>
+
+                  {/* Drawer Navigation Links */}
+                  <div className="flex-1 overflow-y-auto p-4 space-y-2">
+                    
+                    {/* Home Accordion */}
+                    <div className="rounded-xl border border-slate-200/80 dark:border-slate-800 overflow-hidden">
+                      <button
+                        onClick={() => setMobileAccordion(prev => ({ ...prev, home: !prev.home }))}
+                        className="w-full flex items-center justify-between p-3 font-semibold text-sm text-slate-800 dark:text-slate-100 bg-slate-50 dark:bg-obsidian-850"
+                      >
+                        <span className="flex items-center gap-2">
+                          <IconHome className="w-4 h-4 text-gold-500" /> Home
+                        </span>
+                        <IconChevronDown rotate={mobileAccordion.home} />
+                      </button>
+                      <AnimatePresence>
+                        {mobileAccordion.home && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="bg-white dark:bg-obsidian-900 p-2 space-y-1 border-t border-slate-100 dark:border-slate-800"
+                          >
+                            <button
+                              onClick={() => handleNavClick("Home", "Home 1")}
+                              className="w-full text-left [dir='rtl']:text-right px-3 py-2 rounded-lg text-xs font-semibold text-slate-800 dark:text-slate-200 hover:bg-gold-50 hover:text-gold-700 dark:hover:bg-gold-500/20 dark:hover:text-gold-300 transition-colors"
+                            >
+                              Home 1
+                            </button>
+                            <button
+                              onClick={() => handleNavClick("Home", "Home 2")}
+                              className="w-full text-left [dir='rtl']:text-right px-3 py-2 rounded-lg text-xs font-semibold text-slate-800 dark:text-slate-200 hover:bg-gold-50 hover:text-gold-700 dark:hover:bg-gold-500/20 dark:hover:text-gold-300 transition-colors"
+                            >
+                              Home 2
+                            </button>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+
+                    {/* All Standard Links */}
+                    {navLinks.map(link => (
+                      <button
+                        key={link}
+                        onClick={() => handleNavClick(link)}
+                        className={`w-full text-left [dir='rtl']:text-right px-3.5 py-2.5 rounded-xl font-semibold text-sm transition-all flex items-center justify-between ${
+                          activeNav === link
+                            ? 'bg-gold-500 text-white shadow-md'
+                            : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10'
+                        }`}
+                      >
+                        <span>{link}</span>
+                        {link === "Before & After" && (
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-tealSkin-500 text-white">
+                            NEW
+                          </span>
+                        )}
+                      </button>
+                    ))}
+
+                    {/* Dashboard Accordion */}
+                    <div className="rounded-xl border border-slate-200/80 dark:border-slate-800 overflow-hidden">
+                      <button
+                        onClick={() => setMobileAccordion(prev => ({ ...prev, dashboard: !prev.dashboard }))}
+                        className="w-full flex items-center justify-between p-3 font-semibold text-sm text-slate-800 dark:text-slate-100 bg-slate-50 dark:bg-obsidian-850"
+                      >
+                        <span className="flex items-center gap-2">
+                          <IconLayoutDashboard className="w-4 h-4 text-gold-500" /> Dashboard
+                        </span>
+                        <IconChevronDown rotate={mobileAccordion.dashboard} />
+                      </button>
+                      <AnimatePresence>
+                        {mobileAccordion.dashboard && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="bg-white dark:bg-obsidian-900 p-2 space-y-1 border-t border-slate-100 dark:border-slate-800"
+                          >
+                            <button
+                              onClick={() => handleNavClick("Dashboard", "Admin Dashboard")}
+                              className="w-full text-left [dir='rtl']:text-right px-3 py-2 rounded-lg text-xs font-semibold text-slate-800 dark:text-slate-200 hover:bg-gold-50 hover:text-gold-700 dark:hover:bg-gold-500/20 dark:hover:text-gold-300 transition-colors"
+                            >
+                              Admin Dashboard
+                            </button>
+                            <button
+                              onClick={() => handleNavClick("Dashboard", "User Dashboard")}
+                              className="w-full text-left [dir='rtl']:text-right px-3 py-2 rounded-lg text-xs font-semibold text-slate-800 dark:text-slate-200 hover:bg-gold-50 hover:text-gold-700 dark:hover:bg-gold-500/20 dark:hover:text-gold-300 transition-colors"
+                            >
+                              User Dashboard
+                            </button>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+
+                  </div>
+
+                  {/* Drawer Footer: Dark Mode, RTL, and 3D Login Button */}
+                  <div className="p-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50/70 dark:bg-obsidian-950/70 space-y-3">
+                    
+                    {/* Toggles Row */}
+                    <div className="grid grid-cols-2 gap-2">
+                      {/* Dark Mode */}
+                      <button
+                        onClick={toggleDarkMode}
+                        className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-obsidian-850 text-xs font-bold text-slate-700 dark:text-slate-200 shadow-sm"
+                      >
+                        {isDark ? <IconSun className="w-4 h-4 text-amber-400" /> : <IconMoon className="w-4 h-4 text-slate-600" />}
+                        <span>{isDark ? "Light Mode" : "Dark Mode"}</span>
+                      </button>
+
+                      {/* RTL Toggle */}
+                      <button
+                        onClick={toggleRTL}
+                        className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-obsidian-850 text-xs font-bold text-slate-700 dark:text-slate-200 shadow-sm"
+                      >
+                        <IconGlobe className="w-4 h-4 text-gold-500" />
+                        <span>{isRTL ? "RTL Direction" : "LTR Direction"}</span>
+                      </button>
+                    </div>
+
+                    {/* 3D LOGIN BUTTON (Inside Mobile Drawer) */}
+                    <Button3D
+                      icon={IconKeyLock}
+                      size="lg"
+                      onClick={() => { setMobileOpen(false); window.location.href = 'login.html'; }}
+                    >
+                      Login to Clinical Portal
+                    </Button3D>
+
+                    <div className="text-center pt-1 text-[11px] text-slate-400 flex items-center justify-center gap-1.5">
+                      <IconMapPin className="w-3.5 h-3.5 text-gold-500 flex-shrink-0" />
+                      <span>742 Aesthetic Blvd, Suite 400 • (800) 337-6222</span>
+                    </div>
+
+                  </div>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+
+          {/* ========================================================= */}
+          {/* MAIN CONTACT CONTENT (7 UNIQUE & CREATIVE SECTIONS)       */}
+          {/* ========================================================= */}
+          <main className="relative z-10 w-full overflow-hidden">
+            <ContactGatewaySection />
+            <ClinicAddressSection />
+            <InteractiveMapSection />
+            <EmergencyContactSection />
+            <BusinessHoursSection />
+            <AppointmentEnquirySection />
+            <ContactFormSection />
+          </main>
+
+          {/* ========================================================= */}
+          {/* 3D CLINICAL LOGIN MODAL                                    */}
+          {/* ========================================================= */}
+          <AnimatePresence>
+            {loginModal && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setLoginModal(false)}
+                  className="fixed inset-0 bg-black/65 backdrop-blur-md"
+                />
+
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                  className="relative z-10 w-full max-w-md bg-white dark:bg-obsidian-900 rounded-3xl shadow-2xl border border-gold-400/30 p-6 md:p-8 overflow-hidden text-left [dir='rtl']:text-right"
+                >
+                  <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-10 h-10 rounded-xl bg-gold-100 dark:bg-gold-950/60 border border-gold-400/30 flex items-center justify-center text-gold-600 dark:text-gold-300">
+                        <IconKeyLock className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-lg font-bold text-slate-900 dark:text-white">
+                          Clinical Portal Login
+                        </h3>
+                        <p className="text-xs text-slate-500 dark:text-slate-400">
+                          Secure HIPAA-Compliant Access
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => setLoginModal(false)}
+                      className="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                    >
+                      <IconClose className="w-5 h-5" />
+                    </button>
+                  </div>
+
+                  {/* Tabs */}
+                  <div className="grid grid-cols-2 gap-1.5 p-1 my-5 bg-slate-100 dark:bg-obsidian-850 rounded-xl">
+                    <button
+                      onClick={() => setLoginTab("patient")}
+                      className={`py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+                        loginTab === "patient"
+                          ? "bg-white dark:bg-obsidian-700 text-gold-700 dark:text-gold-300 shadow-sm"
+                          : "text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
+                      }`}
+                    >
+                      <IconUser className="w-3.5 h-3.5" />
+                      <span>Patient Login</span>
+                    </button>
+                    <button
+                      onClick={() => setLoginTab("doctor")}
+                      className={`py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+                        loginTab === "doctor"
+                          ? "bg-white dark:bg-obsidian-700 text-gold-700 dark:text-gold-300 shadow-sm"
+                          : "text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
+                      }`}
+                    >
+                      <IconStethoscope className="w-3.5 h-3.5" />
+                      <span>Doctor / Admin</span>
+                    </button>
+                  </div>
+
+                  <form 
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      setLoginModal(false);
+                    }} 
+                    className="space-y-4"
+                  >
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5">
+                        {loginTab === "patient" ? "Patient ID / Email" : "Doctor License / Email"}
+                      </label>
+                      <input 
+                        type="text" 
+                        required
+                        placeholder={loginTab === "patient" ? "patient@derma.com" : "dr.sarah@derma.com"}
+                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-obsidian-850 text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5">
+                        Password
+                      </label>
+                      <input 
+                        type="password" 
+                        required
+                        placeholder="••••••••••••"
+                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-obsidian-850 text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20"
+                      />
+                    </div>
+
+                    <div className="pt-2">
+                      <Button3D size="lg">
+                        Authenticate & Access
+                      </Button3D>
+                    </div>
+                  </form>
+                </motion.div>
+              </div>
+            )}
+          </AnimatePresence>
+
+          {/* Luxury Comprehensive Clinic Footer Based on Navbar */}
+          <Footer
+            activeNav={activeNav}
+            handleNavClick={handleNavClick}
+            setLoginModal={setLoginModal}
+          />
+
+        </div>
+      );
+    }
+
+    // Mount to DOM
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

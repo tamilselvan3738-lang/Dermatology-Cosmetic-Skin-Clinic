@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="goldGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDFBF7" />
+      <stop offset="35%" stop-color="#E6C887" />
+      <stop offset="70%" stop-color="#C5A059" />
+      <stop offset="100%" stop-color="#86642A" />
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5EEAD4" />
+      <stop offset="50%" stop-color="#14B8A6" />
+      <stop offset="100%" stop-color="#0F766E" />
+    </linearGradient>
+    <radialGradient id="auraRadial" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#C5A059" stop-opacity="0.4" />
+      <stop offset="70%" stop-color="#C5A059" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#080C14" stop-opacity="0" />
+    </radialGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Dark Obsidian Luxury Base Circle -->
+  <circle cx="32" cy="32" r="30" fill="#080C14" stroke="url(#goldGlow)" stroke-width="1.8" />
+  
+  <!-- Ambient Radiant Aura Glow -->
+  <circle cx="32" cy="32" r="26" fill="url(#auraRadial)" />
+
+  <!-- Orbiting Precision Accent Ring -->
+  <circle cx="32" cy="32" r="24" fill="none" stroke="#C5A059" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.75" />
+
+  <!-- Outer Dermal Teardrop (Gold Luxury Crest) -->
+  <path d="M32 10 C32 10 16 27 16 38.5 C16 47.3 23.2 54.5 32 54.5 C40.8 54.5 48 47.3 48 38.5 C48 27 32 10 32 10 Z" 
+        fill="url(#goldGlow)" 
+        fill-opacity="0.22" 
+        stroke="url(#goldGlow)" 
+        stroke-width="2.2" 
+        filter="url(#glow)" />
+
+  <!-- Inner Aesthetic Medical Teal Droplet -->
+  <path d="M32 21 C32 21 21.5 32.5 21.5 40 C21.5 45.8 26.2 50.5 32 50.5 C37.8 50.5 42.5 45.8 42.5 40 C42.5 32.5 32 21 32 21 Z" 
+        fill="url(#tealGrad)" 
+        stroke="#2DD4BF" 
+        stroke-width="1" />
+
+  <!-- Brilliant Star Radiance Sparkle in Center Core -->
+  <path d="M32 26 L33.2 31.8 L39 33 L33.2 34.2 L32 40 L30.8 34.2 L25 33 L30.8 31.8 Z" 
+        fill="#FFFFFF" 
+        opacity="0.95" />
+  <circle cx="32" cy="33" r="1.5" fill="#FAF9F6" />
+</svg>
